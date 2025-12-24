@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GravityController : MonoBehaviour
+public class Controller : MonoBehaviour
 {
     // wave movement
     [SerializeField] private Vector2 waveForceDirectionUp;
