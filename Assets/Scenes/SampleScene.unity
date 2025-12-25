@@ -209,9 +209,9 @@ GameObject:
   - component: {fileID: 643977752}
   - component: {fileID: 643977751}
   - component: {fileID: 643977753}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: TopBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,7 +297,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643977750}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -352,9 +352,9 @@ GameObject:
   - component: {fileID: 1140641641}
   - component: {fileID: 1140641640}
   - component: {fileID: 1140641642}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (2)
-  m_TagString: Untagged
+  m_TagString: BottomBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -440,7 +440,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140641639}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -487,6 +487,78 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: waveSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: borderCheckRadius
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: rotationWaveForce
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: waveAngleRotation
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: waveLerpBackSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: borderLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: borderCheckDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: waveForceDirectionStraight.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: moveTransitionCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: moveTransitionCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: moveTransitionCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: moveTransitionCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: moveTransitionCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: moveTransitionCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21
@@ -501,7 +573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_LocalRotation.x
@@ -513,7 +585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -525,12 +597,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4185724974921439904, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6946880832455022729, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608031368057713656, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608031368057713656, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608031368057713656, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
