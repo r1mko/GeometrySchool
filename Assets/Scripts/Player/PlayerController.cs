@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     // wave movement
     [SerializeField] private Vector2 waveForceDirectionUp;
