@@ -681,9 +681,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1007965609854725179, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
+      propertyPath: testMovementBoss
+      value: 
+      objectReference: {fileID: 1299698399}
     - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 3284412678547278945, guid: d0ef6643827c37545872c368e2cc34a2, type: 3}
       propertyPath: m_LocalPosition.y

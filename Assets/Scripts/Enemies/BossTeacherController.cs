@@ -4,21 +4,34 @@ public class BossTeacherController : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform spawnPointPosition;
+    private float waveAmplitudeStep = 4;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            ShotProjectile();
+            WaveShot();
         }
     }
 
-    private void ShotProjectile()
+    private void ShotProjectile(BulletBehaviour.BulletType bulletType)
     {
         GameObject projectile = Instantiate(projectilePrefab, spawnPointPosition);
         BulletBehaviour bulletBehaviour = projectile.GetComponent<BulletBehaviour>();
-        var bulletType = BulletBehaviour.BulletType.Straight;
         Transform playerTransform = GameManager.Instance.Player.transform;
-        bulletBehaviour.Init(bulletType, playerTransform);
+        bulletBehaviour.Init(bulletType, playerTransform, waveAmplitudeStep);
+        waveAmplitudeStep = -waveAmplitudeStep;
+    }
+
+    //for subs
+    private void StraigthShot()
+    {
+        ShotProjectile(BulletBehaviour.BulletType.Straight);
+    }
+
+    private void WaveShot()
+    {
+        ShotProjectile(BulletBehaviour.BulletType.Wave);
+        ShotProjectile(BulletBehaviour.BulletType.Wave);
     }
 }
