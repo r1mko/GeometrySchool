@@ -5,56 +5,91 @@ public class BulletBehaviour : MonoBehaviour
     public enum BulletType
     {
         Straight,
-        Wave
+        Wave,
+        Ray
     }
 
     public BulletType currentBulletType;
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private float destroyOffset = 5f;
-    [SerializeField] private float xSpeed = 10f;
 
-    // Wave-specific
-    [SerializeField]
-    private AnimationCurve waveCurve = new AnimationCurve(
-        new Keyframe(0f, 0f),
-        new Keyframe(0.25f, 1f),
-        new Keyframe(0.5f, 0f),
-        new Keyframe(0.75f, -1f),
-        new Keyframe(1f, 0f)
-    );
-    [SerializeField] private float waveAmplitude = 4f; // координаты границ волны
+    // Wave
     [SerializeField] private float waveDuration = 2f;
+    [SerializeField] private AnimationCurve waveCurve;
+    private float waveAmplitude = 4f;
 
+    // Ray
+    [SerializeField] private float rayDuration = 0.5f;
+    [SerializeField] private float topStart = 12.5f;
+    [SerializeField] private float topEnd = -8;
+    [SerializeField] private float bottomStart = -12.5f;
+    [SerializeField] private float bottomEnd = 8;
+    private Vector3 rayLength = new Vector3(16f, 0.1f, 1);
+    private float rayStartAngle;
+    private float rayEndAngle;
+
+    // Сommon
+    private Transform playerTransform;
+    private float destroyOffset = 5f;
+    private float xSpeed = 10f;
     private float lifetimeFallback = 10f;
     private float elapsedTime = 0f;
     private float startY;
+
+
 
     public void Init(BulletType type, Transform player, float forceWaveAmplitude)
     {
         currentBulletType = type;
         playerTransform = player;
-        waveAmplitude = forceWaveAmplitude;
+
+        if (type == BulletType.Wave)
+        {
+            waveAmplitude = forceWaveAmplitude;
+            startY = transform.position.y;
+        }
+        else if (type == BulletType.Ray)
+        {
+            // Определяем, сверху или снизу
+            bool isFromTop = Random.value > 0.5f;
+            rayStartAngle = isFromTop ? topStart : bottomStart;
+            rayEndAngle = isFromTop ? topEnd : bottomEnd;
+
+            transform.localScale = rayLength;
+            transform.rotation = Quaternion.Euler(0, 0, rayStartAngle);
+        }
+
         CancelInvoke(nameof(DestroyFallback));
-        Invoke(nameof(DestroyFallback), lifetimeFallback);
+        float actualLifetime = (type == BulletType.Ray) ? rayDuration : lifetimeFallback;
+        Invoke(nameof(DestroyFallback), actualLifetime);
     }
 
     private void Update()
     {
-        if (currentBulletType == BulletType.Straight || currentBulletType == BulletType.Wave)
+        elapsedTime += Time.deltaTime;
+
+        switch (currentBulletType)
         {
-            StraightBulletBehaviour();
+            case BulletType.Straight:
+                StraightBulletBehaviour();
+                break;
+
+            case BulletType.Wave:
+                StraightBulletBehaviour();
+                float normalizedWaveTime = Mathf.Repeat(elapsedTime, waveDuration) / waveDuration;
+                float waveOffset = waveCurve.Evaluate(normalizedWaveTime) * waveAmplitude;
+                transform.position = new Vector3(transform.position.x, startY + waveOffset, transform.position.z);
+                break;
+            case BulletType.Ray:
+                if (elapsedTime <= rayDuration)
+                {
+                    float t = elapsedTime / rayDuration;
+                    float currentAngle = Mathf.Lerp(rayStartAngle, rayEndAngle, t);
+                    transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+                }
+                break;
         }
 
-        if (currentBulletType == BulletType.Wave)
-        {
-            elapsedTime += Time.deltaTime;
-            float normalizedTime = Mathf.Repeat(elapsedTime, waveDuration) / waveDuration;
-            float curveValue = waveCurve.Evaluate(normalizedTime);
-            float offsetY = curveValue * waveAmplitude;
-            transform.position = new Vector3(transform.position.x, startY + offsetY, transform.position.z);
-        }
-
-        if (transform.position.x < (playerTransform.position.x - destroyOffset))
+        if ((currentBulletType == BulletType.Straight || currentBulletType == BulletType.Wave) &&
+            transform.position.x < (playerTransform.position.x - destroyOffset))
         {
             Destroy(gameObject);
         }
@@ -74,7 +109,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player detected");
+            Debug.Log("Player hit by bullet!");
         }
     }
 }

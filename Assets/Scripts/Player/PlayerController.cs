@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool atBottomBorder;
 
     public GameObject testMovementBoss;
-    public float initialBossOffsetX; //при 20 ровно в центр (шаг в 11)
+    public float initialBossOffsetX = 18; //при 18 ровно в центр (шаг в 11)
 
     private void Start()
     {

@@ -2,15 +2,18 @@
 
 public class BossTeacherController : MonoBehaviour
 {
+    // Common
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform spawnPointPosition;
-    private float waveAmplitudeStep = 4;
+    
+    // Wave
+    [SerializeField] private float waveAmplitudeStep = 4f;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            WaveShot();
+            RayShot();
         }
     }
 
@@ -32,6 +35,11 @@ public class BossTeacherController : MonoBehaviour
     private void WaveShot()
     {
         ShotProjectile(BulletBehaviour.BulletType.Wave);
-        ShotProjectile(BulletBehaviour.BulletType.Wave);
+        //ShotProjectile(BulletBehaviour.BulletType.Wave);
+    }
+
+    private void RayShot()
+    {
+        ShotProjectile(BulletBehaviour.BulletType.Ray);
     }
 }

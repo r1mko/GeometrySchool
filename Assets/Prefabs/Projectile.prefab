@@ -47,9 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletBehaviour
   currentBulletType: 0
-  playerTransform: {fileID: 0}
-  destroyOffset: 5
-  xSpeed: 10
+  waveDuration: 5
   waveCurve:
     serializedVersion: 2
     m_Curve:
@@ -101,8 +99,11 @@ MonoBehaviour:
     m_PreInfinity: 1
     m_PostInfinity: 1
     m_RotationOrder: 4
-  waveAmplitude: 4
-  waveDuration: 2
+  rayDuration: 2
+  topStart: 30
+  topEnd: -8
+  bottomStart: -30
+  bottomEnd: 8
 --- !u!212 &5448407545810018501
 SpriteRenderer:
   serializedVersion: 2
@@ -199,7 +200,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 1, y: 0.5}
     oldSize: {x: 1.8870239, y: 2.8085938}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
