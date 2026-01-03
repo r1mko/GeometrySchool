@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BossTeacherController : MonoBehaviour
@@ -6,132 +7,229 @@ public class BossTeacherController : MonoBehaviour
     // Common
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform spawnPointPosition;
-
-    // Wave
-    [SerializeField] private float waveAmplitudeStep = 4f;
-
-    // Movement
-    public PlayerController player;
-    public float initialBossOffsetX = 17f;
-
-    // Trap
     [SerializeField] private GameObject trapPrefab;
-    [SerializeField] private float closeOffsetX = 3f;
-    [SerializeField] private float middleOffsetX = 6f;
-    [SerializeField] private float longOffsetX = 9f;
 
-    [SerializeField] private float minY = -4.2f;
-    [SerializeField] private float maxY = 4.2f;
-    [SerializeField] private float minTrapSpacingX = 2f; // ← теперь единый отступ по X
+    // Trap Grid System
+    [System.Serializable]
+    public class SpawnCell
+    {
+        public Transform spawnPoint;
+        public int row;
+        public int column;
+        public bool isBlocked;
+    }
 
-    // Теперь храним ВСЕ активные X-позиции ловушек (всех типов)
-    private List<float> activeTrapXPositions = new();
+    [SerializeField] private List<SpawnCell> spawnCells = new();
+    [SerializeField] private Transform spawnPointsContainer;
+    [SerializeField] private float minPlayerDistance = 4f;
+    [SerializeField] private float resetOffset = 1f;
+
+    private Vector3 originalContainerLocalPosition;
+    private bool isTrapSystemActive;
+    private HashSet<SpawnCell> usedCells = new HashSet<SpawnCell>();
+    private Dictionary<int, int> availableCellsPerRow = new Dictionary<int, int>();
+    private float lastColumnWorldX;
+
+    public PlayerController player;
 
     private void Start()
     {
         player = GameManager.Instance.Player;
+        originalContainerLocalPosition = spawnPointsContainer.localPosition;
+        CacheLastColumnPosition();
+        ResetTrapSystemState();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetTrap(TrapBehaviour.TrapType.Middle);
-        }
+        HandleTrapSystemActivation();
+        HandleTrapSpawning();
+        CheckResetCondition();
     }
 
     private void FixedUpdate()
     {
+        FollowPlayerWithBoss();
+        UpdateTrapContainerPosition();
+    }
+
+    private void FollowPlayerWithBoss()
+    {
         Vector3 bossPos = transform.position;
-        bossPos.x = player.transform.position.x + initialBossOffsetX;
-        transform.position = new Vector3(bossPos.x, transform.position.y, transform.position.z);
+        bossPos.x = player.transform.position.x + 17f; // initialBossOffsetX
+        transform.position = bossPos;
+    }
+
+    private void UpdateTrapContainerPosition()
+    {
+        if (!isTrapSystemActive)
+        {
+            spawnPointsContainer.localPosition = originalContainerLocalPosition;
+        }
+    }
+
+    private void HandleTrapSystemActivation()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !isTrapSystemActive)
+        {
+            ActivateTrapSystem();
+        }
+    }
+
+    private void HandleTrapSpawning()
+    {
+        if (!isTrapSystemActive || !Input.GetKeyDown(KeyCode.Space)) return;
+
+        SpawnRandomTrap();
+    }
+
+    private void CheckResetCondition()
+    {
+        if (isTrapSystemActive && player.transform.position.x > lastColumnWorldX + resetOffset)
+        {
+            ResetTrapSystem();
+        }
+    }
+
+    private void ActivateTrapSystem()
+    {
+        isTrapSystemActive = true;
+        usedCells.Clear();
+        ResetBlockedStates();
+        CacheAvailableCellsPerRow();
+        UpdateLastColumnWorldPosition();
+        DetachSpawnContainer();
+    }
+
+    private void ResetTrapSystem()
+    {
+        isTrapSystemActive = false;
+        usedCells.Clear();
+        ResetBlockedStates();
+        AttachSpawnContainer();
+    }
+
+    private void ResetTrapSystemState()
+    {
+        isTrapSystemActive = false;
+        usedCells.Clear();
+        ResetBlockedStates();
+    }
+
+    private void ResetBlockedStates()
+    {
+        foreach (var cell in spawnCells)
+        {
+            cell.isBlocked = false;
+        }
+    }
+
+    private void DetachSpawnContainer()
+    {
+        spawnPointsContainer.SetParent(null);
+    }
+
+    private void AttachSpawnContainer()
+    {
+        spawnPointsContainer.SetParent(transform);
+        spawnPointsContainer.localPosition = originalContainerLocalPosition;
+    }
+
+    private void SpawnRandomTrap()
+    {
+        UpdateBlockedStates();
+        UpdateAvailableCellsPerRow();
+
+        var eligibleRows = availableCellsPerRow
+            .Where(kvp => kvp.Value >= 2)
+            .Select(kvp => kvp.Key)
+            .ToList();
+
+        if (eligibleRows.Count == 0) return;
+
+        int randomRow = eligibleRows[Random.Range(0, eligibleRows.Count)];
+        var availableCells = GetAvailableCellsInRow(randomRow);
+
+        if (availableCells.Count == 0) return;
+
+        SpawnCell selectedCell = availableCells[Random.Range(0, availableCells.Count)];
+        usedCells.Add(selectedCell);
+        selectedCell.isBlocked = true;
+
+        GameObject trapObj = Instantiate(trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
+        if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
+        {
+            trap.Init(TrapBehaviour.TrapType.Middle, player.transform, this, selectedCell.spawnPoint.position);
+        }
+
+        availableCellsPerRow[randomRow]--;
+    }
+
+    private void UpdateBlockedStates()
+    {
+        float playerX = player.transform.position.x;
+
+        foreach (var cell in spawnCells)
+        {
+            cell.isBlocked = usedCells.Contains(cell) ||
+                             cell.spawnPoint.position.x < playerX + minPlayerDistance;
+        }
+    }
+
+    private void UpdateAvailableCellsPerRow()
+    {
+        availableCellsPerRow.Clear();
+
+        foreach (var cell in spawnCells)
+        {
+            if (cell.isBlocked) continue;
+
+            if (!availableCellsPerRow.ContainsKey(cell.row))
+                availableCellsPerRow[cell.row] = 0;
+
+            availableCellsPerRow[cell.row]++;
+        }
+    }
+
+    private void CacheAvailableCellsPerRow()
+    {
+        availableCellsPerRow = spawnCells
+            .Where(cell => !cell.isBlocked)
+            .GroupBy(cell => cell.row)
+            .ToDictionary(g => g.Key, g => g.Count());
+    }
+
+    private List<SpawnCell> GetAvailableCellsInRow(int row)
+    {
+        return spawnCells
+            .Where(cell => cell.row == row && !cell.isBlocked && !usedCells.Contains(cell))
+            .ToList();
+    }
+
+    private void CacheLastColumnPosition()
+    {
+        int lastColumn = spawnCells.Max(cell => cell.column);
+        lastColumnWorldX = spawnCells
+            .First(cell => cell.column == lastColumn)
+            .spawnPoint.position.x;
+    }
+
+    private void UpdateLastColumnWorldPosition()
+    {
+        int lastColumn = spawnCells.Max(cell => cell.column);
+        lastColumnWorldX = spawnPointsContainer.TransformPoint(
+            spawnCells.First(cell => cell.column == lastColumn).spawnPoint.localPosition
+        ).x;
     }
 
     private void ShotProjectile(BulletBehaviour.BulletType bulletType)
     {
         GameObject projectile = Instantiate(projectilePrefab, spawnPointPosition);
-        BulletBehaviour bulletBehaviour = projectile.GetComponent<BulletBehaviour>();
-        Transform playerTransform = GameManager.Instance.Player.transform;
-        bulletBehaviour.Init(bulletType, playerTransform, waveAmplitudeStep);
-        waveAmplitudeStep = -waveAmplitudeStep;
-    }
-
-    public void SetTrap(TrapBehaviour.TrapType? trapType = null)
-    {
-        TrapBehaviour.TrapType actualType = trapType ?? GetRandomTrapType();
-
-        float offsetX = actualType switch
+        if (projectile.TryGetComponent<BulletBehaviour>(out var bulletBehaviour))
         {
-            TrapBehaviour.TrapType.Close => closeOffsetX,
-            TrapBehaviour.TrapType.Middle => middleOffsetX,
-            TrapBehaviour.TrapType.Long => longOffsetX,
-            _ => middleOffsetX
-        };
-
-        // Случайный Y в строго заданных границах
-        float spawnY = Random.Range(minY, maxY);
-
-        // Базовая X-позиция (от игрока + offsetX)
-        float baseX = player.transform.position.x + offsetX;
-
-        // Найдём ближайшую X-позицию, удалённую минимум на minTrapSpacingX от всех существующих
-        float finalX = FindValidXPosition(baseX, minTrapSpacingX);
-
-        Vector3 spawnPos = new Vector3(finalX, spawnY, 0);
-
-        GameObject trapObj = Instantiate(trapPrefab, spawnPos, Quaternion.identity);
-        TrapBehaviour trap = trapObj.GetComponent<TrapBehaviour>();
-        if (trap != null)
-        {
-            trap.Init(actualType, player.transform, this, spawnPos);
-            activeTrapXPositions.Add(finalX);
-
-            Debug.Log($"[Trap Spawned] Type: {actualType}, Position: X={spawnPos.x:F2}, Y={spawnPos.y:F2}");
+            Transform playerTransform = GameManager.Instance.Player.transform;
+            bulletBehaviour.Init(bulletType, playerTransform, 4f); // waveAmplitudeStep
         }
-    }
-
-    private float FindValidXPosition(float desiredX, float minSpacing)
-    {
-        float candidateX = desiredX;
-        for (int attempt = 0; attempt < 20; attempt++)
-        {
-            bool valid = true;
-            foreach (float x in activeTrapXPositions)
-            {
-                if (Mathf.Abs(candidateX - x) < minSpacing)
-                {
-                    valid = false;
-                    break;
-                }
-            }
-
-            if (valid)
-                return candidateX;
-            candidateX += minSpacing + 0.1f;
-        }
-        return desiredX;
-    }
-
-    public void OnTrapDestroyed(float trapX)
-    {
-        for (int i = activeTrapXPositions.Count - 1; i >= 0; i--)
-        {
-            if (Mathf.Abs(activeTrapXPositions[i] - trapX) < 0.1f)
-            {
-                activeTrapXPositions.RemoveAt(i);
-                break;
-            }
-        }
-    }
-
-    private TrapBehaviour.TrapType GetRandomTrapType()
-    {
-        return Random.Range(0, 3) switch
-        {
-            0 => TrapBehaviour.TrapType.Close,
-            1 => TrapBehaviour.TrapType.Middle,
-            _ => TrapBehaviour.TrapType.Long
-        };
     }
 
     // For subs
@@ -149,4 +247,5 @@ public class BossTeacherController : MonoBehaviour
     {
         ShotProjectile(BulletBehaviour.BulletType.Ray);
     }
+
 }

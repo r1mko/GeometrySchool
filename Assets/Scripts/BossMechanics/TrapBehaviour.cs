@@ -43,7 +43,6 @@ public class TrapBehaviour : MonoBehaviour
 
     private void DestroySelf()
     {
-        bossController.OnTrapDestroyed(SpawnX);
         Destroy(gameObject);
     }
 }
