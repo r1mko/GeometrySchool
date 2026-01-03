@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TopBorder
   - BottomBorder
+  - Obstacle
   layers:
   - Default
   - TransparentFX
