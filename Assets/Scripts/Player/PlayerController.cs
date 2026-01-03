@@ -21,13 +21,11 @@ public class PlayerController : MonoBehaviour
     private bool atTopBorder;
     private bool atBottomBorder;
 
-    public GameObject testMovementBoss;
-    public float initialBossOffsetX = 18; //при 18 ровно в центр (шаг в 11)
+
 
     private void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
-        initialBossOffsetX = testMovementBoss.transform.position.x - transform.position.x;
     }
 
     private void Update()
@@ -61,10 +59,6 @@ public class PlayerController : MonoBehaviour
                 moveTransitionCurve.Evaluate(current)
             );
         }
-
-        Vector3 bossPos = testMovementBoss.transform.position;
-        bossPos.x = transform.position.x + initialBossOffsetX;
-        testMovementBoss.transform.position = bossPos;
     }
 
     private void WaveUp()

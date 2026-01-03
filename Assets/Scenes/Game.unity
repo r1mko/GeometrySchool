@@ -367,37 +367,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8388346978253533349, guid: aeb1db41de87de147bede9f4cdfd9088, type: 3}
   spawnPointPosition: {fileID: 1798485723}
   waveAmplitudeStep: 4
---- !u!1 &1345946970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1345946971}
-  m_Layer: 0
-  m_Name: Level 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1345946971
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345946970}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1798485722
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,30 +621,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1601144094861081036, guid: ee3b0b09f4b58bf439439a5a5de796ef, type: 3}
-      propertyPath: orthographic size
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 2711147815168339667, guid: ee3b0b09f4b58bf439439a5a5de796ef, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 995582463}
-    - target: {fileID: 2711147815168339667, guid: ee3b0b09f4b58bf439439a5a5de796ef, type: 3}
-      propertyPath: xOffset
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2711147815168339667, guid: ee3b0b09f4b58bf439439a5a5de796ef, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2711147815168339667, guid: ee3b0b09f4b58bf439439a5a5de796ef, type: 3}
-      propertyPath: smoothTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2711147815168339667, guid: ee3b0b09f4b58bf439439a5a5de796ef, type: 3}
-      propertyPath: deadZoneHalfWidth
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9147067291278545339, guid: ee3b0b09f4b58bf439439a5a5de796ef, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -694,6 +643,5 @@ SceneRoots:
   - {fileID: 9146923602665316316}
   - {fileID: 8627058191966872316}
   - {fileID: 1299698401}
-  - {fileID: 1345946971}
   - {fileID: 3813033150831472289}
   - {fileID: 3496248568870137701}

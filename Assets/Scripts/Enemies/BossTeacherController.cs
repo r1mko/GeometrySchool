@@ -9,6 +9,15 @@ public class BossTeacherController : MonoBehaviour
     // Wave
     [SerializeField] private float waveAmplitudeStep = 4f;
 
+    // Movement
+    public PlayerController player;
+    public float initialBossOffsetX = 17f;
+
+    private void Start()
+    {
+        player = GameManager.Instance.Player;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -16,6 +25,15 @@ public class BossTeacherController : MonoBehaviour
             RayShot();
         }
     }
+
+    private void FixedUpdate()
+    {
+        Vector3 bossPos = transform.position;
+        bossPos.x = player.transform.position.x + initialBossOffsetX;
+        transform.position = new Vector3(bossPos.x, transform.position.y, transform.position.z);
+    }
+
+
 
     private void ShotProjectile(BulletBehaviour.BulletType bulletType)
     {
