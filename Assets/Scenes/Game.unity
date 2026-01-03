@@ -318,6 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1299698401}
   - component: {fileID: 1299698400}
+  - component: {fileID: 1299698403}
   - component: {fileID: 1299698402}
   m_Layer: 0
   m_Name: Boss
@@ -334,7 +335,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299698399}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -416,7 +417,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossTeacherController
   projectilePrefab: {fileID: 8388346978253533349, guid: aeb1db41de87de147bede9f4cdfd9088, type: 3}
   spawnPointPosition: {fileID: 1798485723}
+  player: {fileID: 995582465}
+  initialBossOffsetX: 17
+  waveAmplitudeStep: 4
+  trapController: {fileID: 1299698403}
+--- !u!114 &1299698403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299698399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfa3519962639b478fffd6c2cae8c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapController
   trapPrefab: {fileID: 6183312796600111060, guid: bd70500f55e514f479749e9cfe5b2896, type: 3}
+  spawnPointsContainer: {fileID: 208303495}
   spawnCells:
   - spawnPoint: {fileID: 4176647764073188571}
     row: 1
@@ -490,10 +508,8 @@ MonoBehaviour:
     row: 5
     column: 5
     isBlocked: 0
-  spawnPointsContainer: {fileID: 208303495}
   minPlayerDistance: 5
-  resetOffset: 10
-  player: {fileID: 995582465}
+  resetOffset: 5
 --- !u!1 &1798485722
 GameObject:
   m_ObjectHideFlags: 0

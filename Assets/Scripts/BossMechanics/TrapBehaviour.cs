@@ -16,15 +16,12 @@ public class TrapBehaviour : MonoBehaviour
     [SerializeField] private float lifetimeFallback = 10f;
 
     private Transform playerTransform;
-    private BossTeacherController bossController;
 
     public void Init(TrapType type, Transform player, BossTeacherController boss, Vector3 spawnPos)
     {
         CurrentType = type;
         playerTransform = player;
-        bossController = boss;
         SpawnX = spawnPos.x;
-
         Invoke(nameof(DestroyFallback), lifetimeFallback);
     }
 
@@ -32,16 +29,11 @@ public class TrapBehaviour : MonoBehaviour
     {
         if (transform.position.x < playerTransform.position.x - destroyOffset)
         {
-            DestroySelf();
+            Destroy(gameObject);
         }
     }
 
     private void DestroyFallback()
-    {
-        DestroySelf();
-    }
-
-    private void DestroySelf()
     {
         Destroy(gameObject);
     }
