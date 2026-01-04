@@ -13,6 +13,9 @@ public class BossTeacherController : MonoBehaviour
     // Wave
     [SerializeField] private float waveAmplitudeStep = 4f;
 
+    // ZBullet
+    [SerializeField] private float zBulletAmplitudeStep = 4f;
+
     // Trap
     [SerializeField] private TrapController trapController;
 
@@ -33,7 +36,11 @@ public class BossTeacherController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            trapController.TriggerTrapPlacement();
+            //trapController.TriggerTrapPlacement();
+            ShotProjectile(BulletBehaviour.BulletType.ZBullet);
+            zBulletAmplitudeStep = -zBulletAmplitudeStep;
+            ShotProjectile(BulletBehaviour.BulletType.ZBullet);
+            zBulletAmplitudeStep = -zBulletAmplitudeStep;
         }
     }
 
@@ -43,7 +50,7 @@ public class BossTeacherController : MonoBehaviour
         if (projectile.TryGetComponent<BulletBehaviour>(out var bulletBehaviour))
         {
             Transform playerTransform = GameManager.Instance.Player.transform;
-            bulletBehaviour.Init(bulletType, playerTransform, waveAmplitudeStep);
+            bulletBehaviour.Init(bulletType, playerTransform, waveAmplitudeStep, zBulletAmplitudeStep);
             waveAmplitudeStep = -waveAmplitudeStep;
         }
     }

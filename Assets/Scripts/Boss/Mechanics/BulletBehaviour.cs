@@ -6,6 +6,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         Straight,
         Wave,
+        ZBullet,
         Ray
     }
 
@@ -15,6 +16,11 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private float waveDuration = 2f;
     [SerializeField] private AnimationCurve waveCurve;
     private float waveAmplitude = 4f;
+
+    // Z Bullet
+    [SerializeField] private float ZBulletDuration = 2f;
+    [SerializeField] private AnimationCurve zBulletCurve;
+    private float zBulletAmplitude = 4f;
 
     // Ray
     [SerializeField] private float rayDuration = 0.5f;
@@ -36,7 +42,7 @@ public class BulletBehaviour : MonoBehaviour
 
 
 
-    public void Init(BulletType type, Transform player, float forceWaveAmplitude)
+    public void Init(BulletType type, Transform player, float forceWaveAmplitude, float forceZBulletAmplitude)
     {
         currentBulletType = type;
         playerTransform = player;
@@ -44,6 +50,11 @@ public class BulletBehaviour : MonoBehaviour
         if (type == BulletType.Wave)
         {
             waveAmplitude = forceWaveAmplitude;
+            startY = transform.position.y;
+        }
+        else if (type == BulletType.ZBullet)
+        {
+            zBulletAmplitude = forceZBulletAmplitude;
             startY = transform.position.y;
         }
         else if (type == BulletType.Ray)
@@ -78,6 +89,12 @@ public class BulletBehaviour : MonoBehaviour
                 float waveOffset = waveCurve.Evaluate(normalizedWaveTime) * waveAmplitude;
                 transform.position = new Vector3(transform.position.x, startY + waveOffset, transform.position.z);
                 break;
+            case BulletType.ZBullet:
+                StraightBulletBehaviour();
+                float normalizedZTime = Mathf.Repeat(elapsedTime, ZBulletDuration) / ZBulletDuration;
+                float zBulletOffset = zBulletCurve.Evaluate(normalizedZTime) * zBulletAmplitude;
+                transform.position = new Vector3(transform.position.x, startY + zBulletOffset, transform.position.z);
+                break;
             case BulletType.Ray:
                 if (elapsedTime <= rayDuration)
                 {
@@ -88,7 +105,7 @@ public class BulletBehaviour : MonoBehaviour
                 break;
         }
 
-        if ((currentBulletType == BulletType.Straight || currentBulletType == BulletType.Wave) &&
+        if ((currentBulletType == BulletType.Straight || currentBulletType == BulletType.Wave || currentBulletType == BulletType.ZBullet) &&
             transform.position.x < (playerTransform.position.x - destroyOffset))
         {
             Destroy(gameObject);

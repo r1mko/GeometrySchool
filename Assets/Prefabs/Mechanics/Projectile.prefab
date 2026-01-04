@@ -99,6 +99,94 @@ MonoBehaviour:
     m_PreInfinity: 1
     m_PostInfinity: 1
     m_RotationOrder: 4
+  ZBulletDuration: 3
+  zBulletCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.281256
+      outSlope: 10.75893
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.21153848
+    - serializedVersion: 3
+      time: 0.125
+      value: 1
+      inSlope: 6.438567
+      outSlope: -7.3885207
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.2884615
+      outWeight: 0.28846145
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: -8.815852
+      outSlope: -8.815852
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.21153831
+    - serializedVersion: 3
+      time: 0.375
+      value: -1
+      inSlope: -7.70517
+      outSlope: 6.692848
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.4326923
+      outWeight: 0.6346152
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: 9.811367
+      outSlope: 10.236571
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.31730795
+      outWeight: 0.2788458
+    - serializedVersion: 3
+      time: 0.625
+      value: 1
+      inSlope: 6.553933
+      outSlope: -8.381937
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.4134617
+      outWeight: 0.3269229
+    - serializedVersion: 3
+      time: 0.75
+      value: -0.0037994385
+      inSlope: -7.950443
+      outSlope: -10.924667
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.22115421
+      outWeight: 0.24038458
+    - serializedVersion: 3
+      time: 0.875
+      value: -1
+      inSlope: -7.9162703
+      outSlope: 8.475067
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.52884626
+      outWeight: 0.49038458
+    - serializedVersion: 3
+      time: 1
+      value: 0.0037994385
+      inSlope: 7.473725
+      outSlope: 7.473725
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.32692337
+      outWeight: 0
+    m_PreInfinity: 1
+    m_PostInfinity: 1
+    m_RotationOrder: 4
   rayDuration: 2
   topStart: 30
   topEnd: -8

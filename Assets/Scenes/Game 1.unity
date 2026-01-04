@@ -420,6 +420,7 @@ MonoBehaviour:
   player: {fileID: 995582465}
   initialBossOffsetX: 17
   waveAmplitudeStep: 4
+  zBulletAmplitudeStep: 4
   trapController: {fileID: 1299698403}
 --- !u!114 &1299698403
 MonoBehaviour:
