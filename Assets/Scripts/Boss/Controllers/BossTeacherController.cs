@@ -36,11 +36,10 @@ public class BossTeacherController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //trapController.TriggerTrapPlacement();
-            ShotProjectile(BulletBehaviour.BulletType.ZBullet);
-            zBulletAmplitudeStep = -zBulletAmplitudeStep;
-            ShotProjectile(BulletBehaviour.BulletType.ZBullet);
-            zBulletAmplitudeStep = -zBulletAmplitudeStep;
+            for (int i = 0; i < 1; i++)
+            {
+                trapController.TriggerTrapPlacement(TrapController.TrapType.Static);
+            }
         }
     }
 

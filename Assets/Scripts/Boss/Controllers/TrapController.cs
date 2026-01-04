@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(BossTeacherController))]
 public class TrapController : MonoBehaviour
 {
+    public enum TrapType { Static, Falling }
+
     [System.Serializable]
     public class SpawnCell
     {
@@ -14,179 +18,245 @@ public class TrapController : MonoBehaviour
         public bool isBlocked = false;
     }
 
-    [Header("References")]
-    [SerializeField] private GameObject staticTrapPrefab;
-    [SerializeField] private GameObject fallingTrapPrefab;
-    [SerializeField] private Transform spawnPointsContainer;
+    [System.Serializable]
+    public class TrapSystem
+    {
+        [Header("Trap Type Settings")]
+        public TrapType type;
+        public GameObject trapPrefab;
+        public Transform spawnPointsContainer;
+        public List<SpawnCell> spawnCells = new();
+        public float resetOffset;
+        public float minPlayerDistance;
 
-    [Header("Settings")]
-    [SerializeField] private List<SpawnCell> spawnCells = new();
-    [SerializeField] private float minPlayerDistance = 4f;
-    [SerializeField] private float resetOffset = 1f;
+        [Header("Runtime Data")]
+        [NonSerialized] public Vector3 originalContainerLocalPosition;
+        [NonSerialized] public bool isTrapSystemActive;
+        [NonSerialized] public HashSet<SpawnCell> usedCells = new();
+        [NonSerialized] public Dictionary<int, int> availableCellsPerRow = new();
+        [NonSerialized] public float lastColumnWorldX;
+        [NonSerialized] public int spawnAttemptCount;
+        [NonSerialized] public int successfulSpawnCount;
+    }
+
+    [Header("Trap Systems")]
+    [SerializeField] private TrapSystem staticTrapSystem = new() { type = TrapType.Static };
+    [SerializeField] private TrapSystem fallingTrapSystem = new() { type = TrapType.Falling };
 
     private PlayerController player;
-
-    private Vector3 originalContainerLocalPosition;
-    private bool isTrapSystemActive;
-    private HashSet<SpawnCell> usedCells = new();
-    private Dictionary<int, int> availableCellsPerRow = new();
-    private float lastColumnWorldX;
 
     private void Start()
     {
         player = GameManager.Instance.Player;
 
-        originalContainerLocalPosition = spawnPointsContainer.localPosition;
-        CacheLastColumnPosition();
-        ResetTrapSystem();
+        InitializeTrapSystem(staticTrapSystem);
+        InitializeTrapSystem(fallingTrapSystem);
+    }
+
+    private void InitializeTrapSystem(TrapSystem system)
+    {
+        if (system.spawnPointsContainer == null)
+        {
+            Debug.LogError($"[TrapController] {system.type} trap system missing spawn points container!");
+            return;
+        }
+
+        system.originalContainerLocalPosition = system.spawnPointsContainer.localPosition;
+        CacheLastColumnPosition(system);
+        ResetTrapSystem(system);
     }
 
     private void Update()
     {
-        if (!isTrapSystemActive) return;
+        CheckResetConditions(staticTrapSystem);
+        CheckResetConditions(fallingTrapSystem);
+    }
 
-        if (player.transform.position.x > lastColumnWorldX + resetOffset)
+    private void CheckResetConditions(TrapSystem system)
+    {
+        if (!system.isTrapSystemActive) return;
+
+        if (player.transform.position.x > system.lastColumnWorldX + system.resetOffset)
         {
-            ResetTrapSystem();
+            ResetTrapSystem(system);
         }
     }
 
     private void FixedUpdate()
     {
-        if (!isTrapSystemActive)
+        if (!staticTrapSystem.isTrapSystemActive)
+            staticTrapSystem.spawnPointsContainer.localPosition = staticTrapSystem.originalContainerLocalPosition;
+
+        if (!fallingTrapSystem.isTrapSystemActive)
+            fallingTrapSystem.spawnPointsContainer.localPosition = fallingTrapSystem.originalContainerLocalPosition;
+    }
+
+    public void TriggerTrapPlacement(TrapType trapType)
+    {
+        TrapSystem targetSystem = trapType == TrapType.Static ? staticTrapSystem : fallingTrapSystem;
+        targetSystem.spawnAttemptCount++;
+
+        if (!targetSystem.isTrapSystemActive)
         {
-            spawnPointsContainer.localPosition = originalContainerLocalPosition;
+            ActivateTrapSystem(targetSystem);
+        }
+
+        SpawnRandomTrap(targetSystem);
+
+        if (targetSystem.spawnAttemptCount >= 18)
+        {
+            targetSystem.spawnAttemptCount = 0;
+            targetSystem.successfulSpawnCount = 0;
         }
     }
 
-    public void TriggerTrapPlacement()
+    private void ActivateTrapSystem(TrapSystem system)
     {
-        if (!isTrapSystemActive)
-        {
-            ActivateTrapSystem();
-        }
-        SpawnRandomTrap();
+        system.isTrapSystemActive = true;
+        system.usedCells.Clear();
+        ResetBlockedStates(system);
+        DetachSpawnContainer(system);
+        UpdateLastColumnWorldPosition(system);
+        CacheAvailableCellsPerRow(system);
     }
 
-    private void ActivateTrapSystem()
+    private void ResetTrapSystem(TrapSystem system)
     {
-        isTrapSystemActive = true;
-        usedCells.Clear();
-        ResetBlockedStates();
-        DetachSpawnContainer();
-        UpdateLastColumnWorldPosition();
-        CacheAvailableCellsPerRow();
+        system.isTrapSystemActive = false;
+        system.usedCells.Clear();
+        ResetBlockedStates(system);
+        AttachSpawnContainer(system);
     }
 
-    private void ResetTrapSystem()
+    private void ResetBlockedStates(TrapSystem system)
     {
-        isTrapSystemActive = false;
-        usedCells.Clear();
-        ResetBlockedStates();
-        AttachSpawnContainer();
-    }
-
-    private void ResetBlockedStates()
-    {
-        foreach (var cell in spawnCells)
+        foreach (var cell in system.spawnCells)
             cell.isBlocked = false;
     }
 
-    private void DetachSpawnContainer()
+    private void DetachSpawnContainer(TrapSystem system)
     {
-        spawnPointsContainer.SetParent(null);
+        system.spawnPointsContainer.SetParent(null);
     }
 
-    private void AttachSpawnContainer()
+    private void AttachSpawnContainer(TrapSystem system)
     {
-        spawnPointsContainer.SetParent(transform);
-        spawnPointsContainer.localPosition = originalContainerLocalPosition;
+        system.spawnPointsContainer.SetParent(transform);
+        system.spawnPointsContainer.localPosition = system.originalContainerLocalPosition;
     }
 
-    private void SpawnRandomTrap()
+    private void SpawnRandomTrap(TrapSystem system)
     {
-        UpdateBlockedStates();
-        UpdateAvailableCellsPerRow();
+        UpdateBlockedStates(system);
+        UpdateAvailableCellsPerRow(system);
 
-        var eligibleRows = availableCellsPerRow
-            .Where(kvp => kvp.Value >= 2) // Оставляем хотя бы 1 клетку свободной в ряду
+        int totalAvailable = system.spawnCells.Count(cell => !cell.isBlocked && !system.usedCells.Contains(cell));
+
+        if (totalAvailable == 0)
+        {
+            Debug.LogWarning($"[{system.type} System] NO AVAILABLE CELLS FOR SPAWN!");
+            return;
+        }
+
+        var eligibleRows = system.availableCellsPerRow
+            .Where(kvp => kvp.Value >= 1)
             .Select(kvp => kvp.Key)
             .ToList();
 
-        if (eligibleRows.Count == 0) return;
+        if (eligibleRows.Count == 0)
+        {
+            Debug.LogWarning($"[{system.type} System] NO ELIGIBLE ROWS! Availability: {GetRowAvailabilityString(system)}");
+            return;
+        }
 
         int randomRow = eligibleRows[Random.Range(0, eligibleRows.Count)];
-        var availableCells = GetAvailableCellsInRow(randomRow);
+        var availableCells = GetAvailableCellsInRow(system, randomRow);
 
-        if (availableCells.Count == 0) return;
+        if (availableCells.Count == 0)
+        {
+            Debug.LogWarning($"[{system.type} System] No available cells in row {randomRow} despite count: {system.availableCellsPerRow[randomRow]}");
+            return;
+        }
 
         SpawnCell selectedCell = availableCells[Random.Range(0, availableCells.Count)];
-        usedCells.Add(selectedCell);
-        selectedCell.isBlocked = true; // Блокируем после использования
+        system.usedCells.Add(selectedCell);
+        selectedCell.isBlocked = true;
 
-        GameObject trapObj = Instantiate(staticTrapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
+        GameObject trapObj = Instantiate(system.trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
         if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
         {
             trap.Init(player.transform, null, selectedCell.spawnPoint.position);
         }
 
-        availableCellsPerRow[randomRow]--;
+        system.availableCellsPerRow[randomRow]--;
+        system.successfulSpawnCount++;
     }
 
-    private void UpdateBlockedStates()
+    private void UpdateBlockedStates(TrapSystem system)
     {
         float playerX = player.transform.position.x;
-        foreach (var cell in spawnCells)
+
+        foreach (var cell in system.spawnCells)
         {
-            cell.isBlocked = usedCells.Contains(cell) ||
-                             cell.spawnPoint.position.x < playerX + minPlayerDistance;
+            bool wasBlocked = cell.isBlocked;
+            bool isUsed = system.usedCells.Contains(cell);
+            bool isTooClose = cell.spawnPoint.position.x < playerX + system.minPlayerDistance;
+
+            cell.isBlocked = isUsed || isTooClose;
         }
     }
 
-    private void UpdateAvailableCellsPerRow()
+    private void UpdateAvailableCellsPerRow(TrapSystem system)
     {
-        availableCellsPerRow.Clear();
-        foreach (var cell in spawnCells)
+        system.availableCellsPerRow.Clear();
+        foreach (var cell in system.spawnCells)
         {
             if (!cell.isBlocked)
             {
-                if (!availableCellsPerRow.ContainsKey(cell.row))
-                    availableCellsPerRow[cell.row] = 0;
-                availableCellsPerRow[cell.row]++;
+                if (!system.availableCellsPerRow.ContainsKey(cell.row))
+                    system.availableCellsPerRow[cell.row] = 0;
+                system.availableCellsPerRow[cell.row]++;
             }
         }
     }
 
-    private void CacheAvailableCellsPerRow()
+    private void CacheAvailableCellsPerRow(TrapSystem system)
     {
-        availableCellsPerRow = spawnCells
+        system.availableCellsPerRow = system.spawnCells
             .Where(cell => !cell.isBlocked)
             .GroupBy(cell => cell.row)
             .ToDictionary(g => g.Key, g => g.Count());
     }
 
-    private List<SpawnCell> GetAvailableCellsInRow(int row)
+    private List<SpawnCell> GetAvailableCellsInRow(TrapSystem system, int row)
     {
-        return spawnCells
-            .Where(cell => cell.row == row && !cell.isBlocked && !usedCells.Contains(cell))
+        return system.spawnCells
+            .Where(cell => cell.row == row && !cell.isBlocked && !system.usedCells.Contains(cell))
             .ToList();
     }
 
-    private void CacheLastColumnPosition()
+    private void CacheLastColumnPosition(TrapSystem system)
     {
-        if (spawnCells.Count == 0) return;
-        int lastColumn = spawnCells.Max(cell => cell.column);
-        lastColumnWorldX = spawnCells
+        if (system.spawnCells.Count == 0) return;
+
+        int lastColumn = system.spawnCells.Max(cell => cell.column);
+        system.lastColumnWorldX = system.spawnCells
             .First(cell => cell.column == lastColumn)
             .spawnPoint.position.x;
     }
 
-    private void UpdateLastColumnWorldPosition()
+    private void UpdateLastColumnWorldPosition(TrapSystem system)
     {
-        if (spawnCells.Count == 0) return;
-        int lastColumn = spawnCells.Max(cell => cell.column);
-        lastColumnWorldX = spawnPointsContainer.TransformPoint(
-            spawnCells.First(cell => cell.column == lastColumn).spawnPoint.localPosition
+        if (system.spawnCells.Count == 0) return;
+
+        int lastColumn = system.spawnCells.Max(cell => cell.column);
+        system.lastColumnWorldX = system.spawnPointsContainer.TransformPoint(
+            system.spawnCells.First(cell => cell.column == lastColumn).spawnPoint.localPosition
         ).x;
+    }
+
+    private string GetRowAvailabilityString(TrapSystem system)
+    {
+        return string.Join(", ", system.availableCellsPerRow.Select(kvp => $"Row {kvp.Key}: {kvp.Value}"));
     }
 }
