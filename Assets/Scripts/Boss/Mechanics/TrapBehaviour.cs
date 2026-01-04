@@ -2,14 +2,6 @@
 
 public class TrapBehaviour : MonoBehaviour
 {
-    public enum TrapType
-    {
-        Close,
-        Middle,
-        Long
-    }
-
-    public TrapType CurrentType { get; private set; }
     public float SpawnX { get; private set; }
 
     [SerializeField] private float destroyOffset = 5f;
@@ -17,9 +9,8 @@ public class TrapBehaviour : MonoBehaviour
 
     private Transform playerTransform;
 
-    public void Init(TrapType type, Transform player, BossTeacherController boss, Vector3 spawnPos)
+    public void Init(Transform player, BossTeacherController boss, Vector3 spawnPos)
     {
-        CurrentType = type;
         playerTransform = player;
         SpawnX = spawnPos.x;
         Invoke(nameof(DestroyFallback), lifetimeFallback);

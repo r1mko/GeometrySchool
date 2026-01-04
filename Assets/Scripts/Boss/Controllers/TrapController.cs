@@ -15,7 +15,8 @@ public class TrapController : MonoBehaviour
     }
 
     [Header("References")]
-    [SerializeField] private GameObject trapPrefab;
+    [SerializeField] private GameObject staticTrapPrefab;
+    [SerializeField] private GameObject fallingTrapPrefab;
     [SerializeField] private Transform spawnPointsContainer;
 
     [Header("Settings")]
@@ -123,10 +124,10 @@ public class TrapController : MonoBehaviour
         usedCells.Add(selectedCell);
         selectedCell.isBlocked = true; // Блокируем после использования
 
-        GameObject trapObj = Instantiate(trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
+        GameObject trapObj = Instantiate(staticTrapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
         if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
         {
-            trap.Init(TrapBehaviour.TrapType.Middle, player.transform, null, selectedCell.spawnPoint.position);
+            trap.Init(player.transform, null, selectedCell.spawnPoint.position);
         }
 
         availableCellsPerRow[randomRow]--;
