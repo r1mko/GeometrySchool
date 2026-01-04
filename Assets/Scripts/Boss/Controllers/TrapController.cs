@@ -7,9 +7,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(BossTeacherController))]
 public class TrapController : MonoBehaviour
 {
-    public enum TrapType { Static, Falling }
-
-    [System.Serializable]
+    [Serializable]
     public class SpawnCell
     {
         public Transform spawnPoint;
@@ -18,7 +16,7 @@ public class TrapController : MonoBehaviour
         public bool isBlocked = false;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class TrapSystem
     {
         [Header("Trap Type Settings")]
@@ -185,7 +183,12 @@ public class TrapController : MonoBehaviour
         GameObject trapObj = Instantiate(system.trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
         if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
         {
-            trap.Init(player.transform, null, selectedCell.spawnPoint.position);
+            TrapType behaviourType =
+                system.type == TrapType.Static
+                    ? TrapType.Static
+                    : TrapType.Falling;
+
+            trap.Init(player.transform, null, selectedCell.spawnPoint.position, behaviourType);
         }
 
         system.availableCellsPerRow[randomRow]--;
