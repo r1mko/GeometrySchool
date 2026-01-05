@@ -8,7 +8,8 @@ public enum TrapType
 public enum RayType
 {
     Dynamic,
-    Static
+    Static,
+    Target
 }
 
 public enum BulletType

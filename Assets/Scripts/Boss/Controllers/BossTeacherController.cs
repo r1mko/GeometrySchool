@@ -34,7 +34,7 @@ public class BossTeacherController : MonoBehaviour
         {
             for (int i = 0; i < 2; i++)
             {
-                rayController.ShotRay(RayType.Static);
+                rayController.ShotRay(RayType.Target);
 
             }
         }

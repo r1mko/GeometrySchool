@@ -11,18 +11,27 @@ public class RayBehaviour : MonoBehaviour
     [SerializeField] private float bottomEnd = 8f;
     [SerializeField] private Vector3 rayLength = new Vector3(16f, 0.1f, 1f);
 
+    private Transform playerTransform;
     private float rayStartAngle;
     private float rayEndAngle;
     private float elapsedTime = 0f;
 
-    public void Init(RayType type)
+    public void Init(RayType type, Transform player)
     {
         currentRayType = type;
+        playerTransform = player;
         if (type == RayType.Dynamic)
         {
             bool isFromTop = Random.value > 0.5f;
             rayStartAngle = isFromTop ? topStart : bottomStart;
             rayEndAngle = isFromTop ? topEnd : bottomEnd;
+        }
+        else if (type == RayType.Target)
+        {
+            Vector2 direction = player.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
+            rayStartAngle = angle;
+            rayEndAngle = angle;
         }
 
         transform.localScale = rayLength;
