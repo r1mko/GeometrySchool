@@ -20,11 +20,14 @@ public class BossTeacherController : MonoBehaviour
 
     // Trap
     [SerializeField] private TrapController trapController;
+    // Ray
+    [SerializeField] private RayController rayController;
 
     private void Start()
     {
         player = GameManager.Instance.Player;
         trapController = GetComponent<TrapController>();
+        rayController = GetComponent<RayController>();
     }
 
     private void FixedUpdate()
@@ -40,7 +43,7 @@ public class BossTeacherController : MonoBehaviour
         {
             for (int i = 0; i < 1; i++)
             {
-                RayShot();
+                rayController.ShotRay(RayType.Dynamic);
             }
         }
     }
@@ -56,17 +59,7 @@ public class BossTeacherController : MonoBehaviour
         }
     }
 
-    private void ShotRay(RayBehaviour.RayType rayType)
-    {
-        GameObject projectile = Instantiate(rayPrefab, spawnPointPosition);
-        if (projectile.TryGetComponent<RayBehaviour>(out var rayBehaviour))
-        {
-            rayBehaviour.Init(rayType);
-        }
-    }
-
     private void StraigthShot() => ShotProjectile(BulletBehaviour.BulletType.Straight);
     private void WaveShot() => ShotProjectile(BulletBehaviour.BulletType.Wave);
-    private void RayShot() => ShotRay(RayBehaviour.RayType.Dynamic);
 
 }

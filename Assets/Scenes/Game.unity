@@ -536,9 +536,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1299698401}
-  - component: {fileID: 1299698400}
-  - component: {fileID: 1299698403}
   - component: {fileID: 1299698402}
+  - component: {fileID: 1299698403}
+  - component: {fileID: 1299698404}
+  - component: {fileID: 1299698400}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -644,6 +645,7 @@ MonoBehaviour:
   waveAmplitudeStep: 4
   zBulletAmplitudeStep: 4
   trapController: {fileID: 1299698403}
+  rayController: {fileID: 1299698404}
 --- !u!114 &1299698403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,6 +835,20 @@ MonoBehaviour:
       isBlocked: 0
     resetOffset: 16
     minPlayerDistance: 5
+--- !u!114 &1299698404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299698399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cfb14d83c02a9245ba2ab20e62d8ad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RayController
+  rayPrefab: {fileID: 8388346978253533349, guid: cbe3964b29ba9cb4dac59c3fcb0bf4d7, type: 3}
+  raySpawnPoint: {fileID: 1798485723}
 --- !u!1 &1310666642
 GameObject:
   m_ObjectHideFlags: 0

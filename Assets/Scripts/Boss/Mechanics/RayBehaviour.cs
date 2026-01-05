@@ -2,11 +2,6 @@
 
 public class RayBehaviour : MonoBehaviour
 {
-    public enum RayType
-    {
-        Dynamic,
-        Static
-    }
 
     public RayType currentRayType;
 
