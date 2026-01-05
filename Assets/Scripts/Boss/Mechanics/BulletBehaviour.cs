@@ -7,7 +7,6 @@ public class BulletBehaviour : MonoBehaviour
         Straight,
         Wave,
         ZBullet,
-        Ray
     }
 
     public BulletType currentBulletType;
@@ -22,25 +21,13 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private AnimationCurve zBulletCurve;
     private float zBulletAmplitude = 4f;
 
-    // Ray
-    [SerializeField] private float rayDuration = 0.5f;
-    [SerializeField] private float topStart = 12.5f;
-    [SerializeField] private float topEnd = -8;
-    [SerializeField] private float bottomStart = -12.5f;
-    [SerializeField] private float bottomEnd = 8;
-    private Vector3 rayLength = new Vector3(16f, 0.1f, 1);
-    private float rayStartAngle;
-    private float rayEndAngle;
-
     // Сommon
     private Transform playerTransform;
     private float destroyOffset = 5f;
     private float xSpeed = 10f;
-    private float lifetimeFallback = 10f;
+    private float bulletLifetimeFallback = 10f;
     private float elapsedTime = 0f;
     private float startY;
-
-
 
     public void Init(BulletType type, Transform player, float forceWaveAmplitude, float forceZBulletAmplitude)
     {
@@ -57,20 +44,9 @@ public class BulletBehaviour : MonoBehaviour
             zBulletAmplitude = forceZBulletAmplitude;
             startY = transform.position.y;
         }
-        else if (type == BulletType.Ray)
-        {
-            // Определяем, сверху или снизу
-            bool isFromTop = Random.value > 0.5f;
-            rayStartAngle = isFromTop ? topStart : bottomStart;
-            rayEndAngle = isFromTop ? topEnd : bottomEnd;
-
-            transform.localScale = rayLength;
-            transform.rotation = Quaternion.Euler(0, 0, rayStartAngle);
-        }
 
         CancelInvoke(nameof(DestroyFallback));
-        float actualLifetime = (type == BulletType.Ray) ? rayDuration : lifetimeFallback;
-        Invoke(nameof(DestroyFallback), actualLifetime);
+        Invoke(nameof(DestroyFallback), bulletLifetimeFallback);
     }
 
     private void Update()
@@ -95,18 +71,9 @@ public class BulletBehaviour : MonoBehaviour
                 float zBulletOffset = zBulletCurve.Evaluate(normalizedZTime) * zBulletAmplitude;
                 transform.position = new Vector3(transform.position.x, startY + zBulletOffset, transform.position.z);
                 break;
-            case BulletType.Ray:
-                if (elapsedTime <= rayDuration)
-                {
-                    float t = elapsedTime / rayDuration;
-                    float currentAngle = Mathf.Lerp(rayStartAngle, rayEndAngle, t);
-                    transform.rotation = Quaternion.Euler(0, 0, currentAngle);
-                }
-                break;
         }
 
-        if ((currentBulletType == BulletType.Straight || currentBulletType == BulletType.Wave || currentBulletType == BulletType.ZBullet) &&
-            transform.position.x < (playerTransform.position.x - destroyOffset))
+        if (transform.position.x < (playerTransform.position.x - destroyOffset))
         {
             Destroy(gameObject);
         }

@@ -638,6 +638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossTeacherController
   projectilePrefab: {fileID: 8388346978253533349, guid: aeb1db41de87de147bede9f4cdfd9088, type: 3}
   spawnPointPosition: {fileID: 1798485723}
+  rayPrefab: {fileID: 8388346978253533349, guid: cbe3964b29ba9cb4dac59c3fcb0bf4d7, type: 3}
   player: {fileID: 995582465}
   initialBossOffsetX: 17
   waveAmplitudeStep: 4

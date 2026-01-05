@@ -6,6 +6,8 @@ public class BossTeacherController : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform spawnPointPosition;
 
+    [SerializeField] private GameObject rayPrefab;
+
     // Movement
     public PlayerController player;
     public float initialBossOffsetX = 17f;
@@ -38,7 +40,7 @@ public class BossTeacherController : MonoBehaviour
         {
             for (int i = 0; i < 1; i++)
             {
-                trapController.TriggerTrapPlacement(TrapType.Column);
+                RayShot();
             }
         }
     }
@@ -54,8 +56,17 @@ public class BossTeacherController : MonoBehaviour
         }
     }
 
+    private void ShotRay(RayBehaviour.RayType rayType)
+    {
+        GameObject projectile = Instantiate(rayPrefab, spawnPointPosition);
+        if (projectile.TryGetComponent<RayBehaviour>(out var rayBehaviour))
+        {
+            rayBehaviour.Init(rayType);
+        }
+    }
+
     private void StraigthShot() => ShotProjectile(BulletBehaviour.BulletType.Straight);
     private void WaveShot() => ShotProjectile(BulletBehaviour.BulletType.Wave);
-    private void RayShot() => ShotProjectile(BulletBehaviour.BulletType.Ray);
+    private void RayShot() => ShotRay(RayBehaviour.RayType.Dynamic);
 
 }
