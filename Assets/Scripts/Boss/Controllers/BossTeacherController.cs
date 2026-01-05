@@ -32,11 +32,9 @@ public class BossTeacherController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            bulletController.ShotProjectile(BulletType.Straight);
             for (int i = 0; i < 2; i++)
             {
-                bulletController.ShotProjectile(BulletType.Wave);
-                bulletController.ShotProjectile(BulletType.ZBullet);
+                rayController.ShotRay(RayType.Static);
 
             }
         }

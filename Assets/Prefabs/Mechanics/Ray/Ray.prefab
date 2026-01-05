@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RayBehaviour
   currentRayType: 0
-  rayDuration: 2
+  rayDuration: 12
   topStart: 30
   topEnd: -8
   bottomStart: -30

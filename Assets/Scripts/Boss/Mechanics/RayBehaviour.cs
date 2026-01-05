@@ -2,7 +2,6 @@
 
 public class RayBehaviour : MonoBehaviour
 {
-
     public RayType currentRayType;
 
     [SerializeField] private float rayDuration = 2f;
@@ -19,9 +18,12 @@ public class RayBehaviour : MonoBehaviour
     public void Init(RayType type)
     {
         currentRayType = type;
-        bool isFromTop = Random.value > 0.5f;
-        rayStartAngle = isFromTop ? topStart : bottomStart;
-        rayEndAngle = isFromTop ? topEnd : bottomEnd;
+        if (type == RayType.Dynamic)
+        {
+            bool isFromTop = Random.value > 0.5f;
+            rayStartAngle = isFromTop ? topStart : bottomStart;
+            rayEndAngle = isFromTop ? topEnd : bottomEnd;
+        }
 
         transform.localScale = rayLength;
         transform.rotation = Quaternion.Euler(0, 0, rayStartAngle);
@@ -36,9 +38,12 @@ public class RayBehaviour : MonoBehaviour
 
         if (elapsedTime <= rayDuration)
         {
-            float t = elapsedTime / rayDuration;
-            float currentAngle = Mathf.Lerp(rayStartAngle, rayEndAngle, t);
-            transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+            if (currentRayType == RayType.Dynamic)
+            {
+                float t = elapsedTime / rayDuration;
+                float currentAngle = Mathf.Lerp(rayStartAngle, rayEndAngle, t);
+                transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+            }
         }
         else
         {
