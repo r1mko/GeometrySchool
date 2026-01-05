@@ -10,7 +10,7 @@ public class BulletBehaviour : MonoBehaviour
     private float waveAmplitude = 4f;
 
     // Z Bullet
-    [SerializeField] private float ZBulletDuration = 2f;
+    [SerializeField] private float zBulletDuration = 2f;
     [SerializeField] private AnimationCurve zBulletCurve;
     private float zBulletAmplitude = 4f;
 
@@ -60,7 +60,7 @@ public class BulletBehaviour : MonoBehaviour
                 break;
             case BulletType.ZBullet:
                 StraightBulletBehaviour();
-                float normalizedZTime = Mathf.Repeat(elapsedTime, ZBulletDuration) / ZBulletDuration;
+                float normalizedZTime = Mathf.Repeat(elapsedTime, zBulletDuration) / zBulletDuration;
                 float zBulletOffset = zBulletCurve.Evaluate(normalizedZTime) * zBulletAmplitude;
                 transform.position = new Vector3(transform.position.x, startY + zBulletOffset, transform.position.z);
                 break;
