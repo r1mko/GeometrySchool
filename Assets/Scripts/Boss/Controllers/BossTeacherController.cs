@@ -38,7 +38,7 @@ public class BossTeacherController : MonoBehaviour
         {
             for (int i = 0; i < 1; i++)
             {
-                trapController.TriggerTrapPlacement(TrapType.Falling);
+                trapController.TriggerTrapPlacement(TrapType.Column);
             }
         }
     }

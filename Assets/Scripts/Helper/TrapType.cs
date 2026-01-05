@@ -1,5 +1,6 @@
 public enum TrapType
 {
     Static,
-    Falling
+    Falling,
+    Column
 }

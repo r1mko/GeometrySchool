@@ -48,6 +48,8 @@ public class TrapBehaviour : MonoBehaviour
         {
             case TrapType.Static:
                 break;
+            case TrapType.Column:
+                break;
 
             case TrapType.Falling:
                 float fallProgress = (Time.time - fallStartTime) / fallDuration;
