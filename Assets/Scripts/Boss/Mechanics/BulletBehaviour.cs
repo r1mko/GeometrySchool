@@ -2,13 +2,6 @@
 
 public class BulletBehaviour : MonoBehaviour
 {
-    public enum BulletType
-    {
-        Straight,
-        Wave,
-        ZBullet,
-    }
-
     public BulletType currentBulletType;
 
     // Wave

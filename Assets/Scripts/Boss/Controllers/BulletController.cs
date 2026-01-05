@@ -2,15 +2,29 @@
 
 public class BulletController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform spawnPointPosition;
+    public PlayerController player;
+
+    // Wave
+    [SerializeField] private float waveAmplitudeStep = 4f;
+
+    // ZBullet
+    [SerializeField] private float zBulletAmplitudeStep = 4f;
+
+    private void Start()
     {
-        
+        player = GameManager.Instance.Player;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShotProjectile(BulletType bulletType)
     {
-        
+        GameObject projectile = Instantiate(projectilePrefab, spawnPointPosition);
+        if (projectile.TryGetComponent<BulletBehaviour>(out var bulletBehaviour))
+        {
+            Transform playerTransform = GameManager.Instance.Player.transform;
+            bulletBehaviour.Init(bulletType, playerTransform, waveAmplitudeStep, zBulletAmplitudeStep);
+            waveAmplitudeStep = -waveAmplitudeStep;
+        }
     }
 }

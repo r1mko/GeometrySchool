@@ -13,6 +13,7 @@ public enum RayType
 
 public enum BulletType
 {
-    Dynamic,
-    Static
+    Straight,
+    Wave,
+    ZBullet,
 }

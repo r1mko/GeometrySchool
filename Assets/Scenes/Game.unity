@@ -538,6 +538,7 @@ GameObject:
   - component: {fileID: 1299698401}
   - component: {fileID: 1299698402}
   - component: {fileID: 1299698403}
+  - component: {fileID: 1299698405}
   - component: {fileID: 1299698404}
   - component: {fileID: 1299698400}
   m_Layer: 0
@@ -637,15 +638,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41bf0cb91697ca4184a32ffc9194fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossTeacherController
-  projectilePrefab: {fileID: 8388346978253533349, guid: aeb1db41de87de147bede9f4cdfd9088, type: 3}
-  spawnPointPosition: {fileID: 1798485723}
-  rayPrefab: {fileID: 8388346978253533349, guid: cbe3964b29ba9cb4dac59c3fcb0bf4d7, type: 3}
   player: {fileID: 995582465}
   initialBossOffsetX: 17
-  waveAmplitudeStep: 4
-  zBulletAmplitudeStep: 4
   trapController: {fileID: 1299698403}
   rayController: {fileID: 1299698404}
+  bulletController: {fileID: 1299698405}
 --- !u!114 &1299698403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,6 +846,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RayController
   rayPrefab: {fileID: 8388346978253533349, guid: cbe3964b29ba9cb4dac59c3fcb0bf4d7, type: 3}
   raySpawnPoint: {fileID: 1798485723}
+--- !u!114 &1299698405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299698399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2887ee1bbbd24046a3447796c8cce5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletController
+  projectilePrefab: {fileID: 8388346978253533349, guid: aeb1db41de87de147bede9f4cdfd9088, type: 3}
+  spawnPointPosition: {fileID: 1798485723}
+  player: {fileID: 995582465}
+  waveAmplitudeStep: 4
+  zBulletAmplitudeStep: 4
 --- !u!1 &1310666642
 GameObject:
   m_ObjectHideFlags: 0
