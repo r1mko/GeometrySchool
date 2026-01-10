@@ -14,7 +14,7 @@ public class RayBehaviour : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Transform playerTransform;
-    private bool marked;
+    private bool isMarking;
     private float rayStartAngle;
     private float rayEndAngle;
     private float elapsedTime = 0f;
@@ -36,6 +36,8 @@ public class RayBehaviour : MonoBehaviour
             rayStartAngle = angle;
             rayEndAngle = angle;
             rayDuration += markedDuration; // lifetime = markedDuration + rayDuration
+            isMarking = true;
+            spriteRenderer.color = Color.red;
         }
 
         transform.localScale = rayLength;
@@ -49,21 +51,15 @@ public class RayBehaviour : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
-        // Marked
-        if (currentRayType == RayType.Target)
+        // Mark
+        if (isMarking)
         {
-            if (elapsedTime <= markedDuration)
+            if (elapsedTime >= markedDuration)
             {
-                spriteRenderer.color = Color.red;
-                marked = true;
-            }
-            else
-            {
+                isMarking = false;
                 spriteRenderer.color = Color.white;
-                marked = false;
             }
         }
-
 
         // Lifetime
         if (elapsedTime <= rayDuration)
@@ -90,7 +86,7 @@ public class RayBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (marked)
+            if (isMarking)
             {
                 Debug.Log("It's just marked. Ignoring");
                 return;
