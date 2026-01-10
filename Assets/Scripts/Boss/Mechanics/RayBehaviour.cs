@@ -4,14 +4,17 @@ public class RayBehaviour : MonoBehaviour
 {
     public RayType currentRayType;
 
+    [SerializeField] private float markedDuration = 1f;
     [SerializeField] private float rayDuration = 2f;
     [SerializeField] private float topStart = 30f;
     [SerializeField] private float topEnd = -8f;
     [SerializeField] private float bottomStart = -30f;
     [SerializeField] private float bottomEnd = 8f;
     [SerializeField] private Vector3 rayLength = new Vector3(16f, 0.1f, 1f);
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Transform playerTransform;
+    private bool marked;
     private float rayStartAngle;
     private float rayEndAngle;
     private float elapsedTime = 0f;
@@ -32,6 +35,7 @@ public class RayBehaviour : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
             rayStartAngle = angle;
             rayEndAngle = angle;
+            rayDuration += markedDuration; // lifetime = markedDuration + rayDuration
         }
 
         transform.localScale = rayLength;
@@ -45,6 +49,23 @@ public class RayBehaviour : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
 
+        // Marked
+        if (currentRayType == RayType.Target)
+        {
+            if (elapsedTime <= markedDuration)
+            {
+                spriteRenderer.color = Color.red;
+                marked = true;
+            }
+            else
+            {
+                spriteRenderer.color = Color.white;
+                marked = false;
+            }
+        }
+
+
+        // Lifetime
         if (elapsedTime <= rayDuration)
         {
             if (currentRayType == RayType.Dynamic)
@@ -69,6 +90,11 @@ public class RayBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            if (marked)
+            {
+                Debug.Log("It's just marked. Ignoring");
+                return;
+            }
             Debug.Log("Player hit by Ray!");
         }
     }

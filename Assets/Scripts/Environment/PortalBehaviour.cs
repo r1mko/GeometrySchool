@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class PortalController : MonoBehaviour
+public class PortalBehaviour : MonoBehaviour
 {
     [Header("References")]
     public Transform Destination;
-    public PortalController DestinationPortal;
+    public PortalBehaviour DestinationPortal;
 
     [Header("Safety")]
     [Tooltip("Distance to push player outward from the center of the destination portal")]
