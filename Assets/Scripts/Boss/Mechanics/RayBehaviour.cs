@@ -7,16 +7,19 @@ public class RayBehaviour : MonoBehaviour
 
     [SerializeField] private float markedDuration = 1f;
     [SerializeField] private float rayDuration = 2f;
-    [SerializeField] private float scaleUpDuration = 0.3f;
+    [SerializeField] private float scaleUpDuration = 0.25f;
+    [SerializeField] private float scaleDownDuration = 0.25f;
     [SerializeField] private float topStart = 30f;
     [SerializeField] private float topEnd = -8f;
     [SerializeField] private float bottomStart = -30f;
     [SerializeField] private float bottomEnd = 8f;
     [SerializeField] private Vector3 rayLength = new Vector3(16f, 0.1f, 1f);
+
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Transform playerTransform;
     private bool isMarking;
+    private bool startedScalingDown;
     private float rayStartAngle;
     private float rayEndAngle;
     private float elapsedTime = 0f;
@@ -43,6 +46,7 @@ public class RayBehaviour : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(0, 0, rayStartAngle);
+        transform.localScale = Vector3.zero;
         StartCoroutine(ScaleUpRoutine());
 
         CancelInvoke(nameof(DestroyFallback));
@@ -72,6 +76,15 @@ public class RayBehaviour : MonoBehaviour
                 float currentAngle = Mathf.Lerp(rayStartAngle, rayEndAngle, t);
                 transform.rotation = Quaternion.Euler(0, 0, currentAngle);
             }
+
+            if (!startedScalingDown)
+            {
+                if (elapsedTime >= rayDuration - scaleDownDuration)
+                {
+                    StartCoroutine(ScaleDownRoutine());
+                    startedScalingDown = true;
+                }
+            }
         }
         else
         {
@@ -96,6 +109,22 @@ public class RayBehaviour : MonoBehaviour
         transform.localScale = targetScale;
     }
 
+    private IEnumerator ScaleDownRoutine()
+    {
+        Vector3 startScale = rayLength;
+        float elapsed = 0f;
+
+        while (elapsed < scaleDownDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / scaleDownDuration);
+            float newY = Mathf.Lerp(startScale.y, 0f, t);
+            transform.localScale = new Vector3(startScale.x, newY, startScale.z);
+            yield return null;
+        }
+
+        transform.localScale = new Vector3(startScale.x, 0f, startScale.z);
+    }
 
     private void DestroyFallback()
     {
@@ -106,9 +135,9 @@ public class RayBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (isMarking)
+            if (isMarking && startedScalingDown)
             {
-                Debug.Log("It's just marked. Ignoring");
+                Debug.Log("It's just marked or scalling. Ignoring");
                 return;
             }
             Debug.Log("Player hit by Ray!");
