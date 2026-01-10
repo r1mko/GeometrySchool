@@ -32,9 +32,9 @@ public class BossTeacherController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 1; i++)
             {
-                rayController.ShotRay(RayType.Target);
+                rayController.ShotRay(RayType.Static);
 
             }
         }

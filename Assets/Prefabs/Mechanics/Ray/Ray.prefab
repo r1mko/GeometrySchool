@@ -49,6 +49,7 @@ MonoBehaviour:
   currentRayType: 0
   markedDuration: 1
   rayDuration: 2
+  scaleUpDuration: 0.25
   topStart: 30
   topEnd: -8
   bottomStart: -30

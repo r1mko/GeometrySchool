@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class RayBehaviour : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class RayBehaviour : MonoBehaviour
 
     [SerializeField] private float markedDuration = 1f;
     [SerializeField] private float rayDuration = 2f;
+    [SerializeField] private float scaleUpDuration = 0.3f;
     [SerializeField] private float topStart = 30f;
     [SerializeField] private float topEnd = -8f;
     [SerializeField] private float bottomStart = -30f;
@@ -40,8 +42,8 @@ public class RayBehaviour : MonoBehaviour
             spriteRenderer.color = Color.red;
         }
 
-        transform.localScale = rayLength;
         transform.rotation = Quaternion.Euler(0, 0, rayStartAngle);
+        StartCoroutine(ScaleUpRoutine());
 
         CancelInvoke(nameof(DestroyFallback));
         Invoke(nameof(DestroyFallback), rayDuration);
@@ -76,6 +78,24 @@ public class RayBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private IEnumerator ScaleUpRoutine()
+    {
+        float elapsed = 0f;
+        Vector3 startScale = Vector3.zero;
+        Vector3 targetScale = rayLength;
+
+        while (elapsed < scaleUpDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / scaleUpDuration);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
+    }
+
 
     private void DestroyFallback()
     {
