@@ -9,11 +9,6 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float xOffset;
     [SerializeField] private float deadZoneHalfWidth;
 
-    [Header("Smoothing")]
-    [SerializeField] private float smoothTime;
-
-    private Vector3 velocity = Vector3.zero;
-
     void LateUpdate()
     {
         if (target == null) return;
@@ -29,7 +24,6 @@ public class CameraFollow : MonoBehaviour
             desiredX = targetX - Mathf.Sign(delta) * deadZoneHalfWidth;
         }
 
-        float smoothedX = Mathf.SmoothDamp(currentX, desiredX, ref velocity.x, smoothTime);
-        transform.position = new Vector3(smoothedX, transform.position.y, transform.position.z);
+        transform.position = new Vector3(desiredX, transform.position.y, transform.position.z);
     }
 }
