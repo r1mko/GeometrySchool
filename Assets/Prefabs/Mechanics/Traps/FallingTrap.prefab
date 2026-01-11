@@ -154,7 +154,7 @@ MonoBehaviour:
   currentTrapType: 1
   destroyOffset: 5
   lifetimeFallback: 10
-  fallTargetY: -3.85
+  fallTargetY: -4
   fallDuration: 2.5
   fallCurve:
     serializedVersion: 2

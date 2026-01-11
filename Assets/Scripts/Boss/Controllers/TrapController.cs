@@ -198,7 +198,10 @@ public class TrapController : MonoBehaviour
         selectedCell.isBlocked = true;
 
         GameObject trapObj = Instantiate(system.trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
-        ActionBus.InvokeSpawnStaticTrap(selectedCell.spawnPoint.position);
+        if (system.type == TrapType.Static)
+        {
+            ActionBus.InvokeSpawnStaticTrap(selectedCell.spawnPoint.position);
+        }
         if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
         {
             trap.Init(player.transform, null, selectedCell.spawnPoint.position, system.type);

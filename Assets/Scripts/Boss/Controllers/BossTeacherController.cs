@@ -35,7 +35,7 @@ public class BossTeacherController : MonoBehaviour
             for (int i = 0; i < 1; i++)
             {
                 //rayController.ShotRay(RayType.Target);
-                trapController.TriggerTrapPlacement(TrapType.Static);
+                trapController.TriggerTrapPlacement(TrapType.Falling);
 
             }
         }
