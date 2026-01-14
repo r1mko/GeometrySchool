@@ -255,6 +255,8 @@ public class TrapController : MonoBehaviour
             return;
         }
 
+        ActionBus.InvokeSpawnColumn();
+
         SpawnCell skippedCell = availableCellsInRow[Random.Range(0, availableCellsInRow.Count)];
 
         int spawnedCount = 0;
