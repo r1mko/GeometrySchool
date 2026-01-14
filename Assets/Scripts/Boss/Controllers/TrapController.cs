@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -110,7 +111,7 @@ public class TrapController : MonoBehaviour
 
         if (trapType == TrapType.Column)
         {
-            SpawnNextAvailableRow(targetSystem);
+            StartCoroutine(SpawnNextAvailableRow(targetSystem));
         }
         else
         {
@@ -211,7 +212,7 @@ public class TrapController : MonoBehaviour
     }
 
     // === COLUMN LOGIC ===
-    private void SpawnNextAvailableRow(TrapSystem system)
+    private IEnumerator SpawnNextAvailableRow(TrapSystem system)
     {
         UpdateBlockedStates(system);
 
@@ -224,24 +225,24 @@ public class TrapController : MonoBehaviour
         if (rowsOrdered.Count == 0)
         {
             Debug.LogWarning("[Column System] No rows found!");
-            return;
+            yield break;
         }
 
         var targetRowData = rowsOrdered
             .Where(rowGroup => rowGroup.Row > system.lastSpawnedRow)
             .FirstOrDefault(rowGroup =>
             {
-            var availableCells = rowGroup.Cells
-                    .Where(cell => !cell.isBlocked && !system.usedCells.Contains(cell))
-                    .ToList();
+                var availableCells = rowGroup.Cells
+                        .Where(cell => !cell.isBlocked && !system.usedCells.Contains(cell))
+                        .ToList();
 
-            return availableCells.Count > 0;
+                return availableCells.Count > 0;
             });
 
         if (targetRowData == null)
         {
             Debug.LogWarning("[Column System] No next row available!");
-            return;
+            yield break;
         }
 
         var availableCellsInRow = targetRowData.Cells
@@ -252,17 +253,22 @@ public class TrapController : MonoBehaviour
         {
             Debug.LogWarning($"[Column System] Row {targetRowData.Row} has no available cells!");
             system.lastSpawnedRow = targetRowData.Row;
-            return;
+            yield break;
         }
-
-        ActionBus.InvokeSpawnColumn();
 
         SpawnCell skippedCell = availableCellsInRow[Random.Range(0, availableCellsInRow.Count)];
 
         int spawnedCount = 0;
+        system.lastSpawnedRow = targetRowData.Row;
+        system.successfulSpawnCount += spawnedCount;
+
+        ActionBus.InvokeSpawnColumn();
+        yield return new WaitForSeconds(Consts.HalfColumnAnimation); //TO DO
+
         foreach (var cell in availableCellsInRow)
         {
             if (cell == skippedCell) continue;
+
 
             GameObject trapObj = Instantiate(system.trapPrefab, cell.spawnPoint.position, Quaternion.identity);
             if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
@@ -274,9 +280,6 @@ public class TrapController : MonoBehaviour
             cell.isBlocked = true;
             spawnedCount++;
         }
-
-        system.lastSpawnedRow = targetRowData.Row;
-        system.successfulSpawnCount += spawnedCount;
 
         Debug.Log($"[Column System] Spawned row {targetRowData.Row}: {spawnedCount} traps, skipped 1 random cell (total available: {availableCellsInRow.Count})");
     }
