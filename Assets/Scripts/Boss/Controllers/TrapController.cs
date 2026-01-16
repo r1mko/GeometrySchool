@@ -115,7 +115,7 @@ public class TrapController : MonoBehaviour
         }
         else
         {
-            SpawnRandomTrap(targetSystem);
+            StartCoroutine(SpawnRandomTrap(targetSystem));
         }
 
         if (targetSystem.spawnAttemptCount >= 18)
@@ -162,7 +162,7 @@ public class TrapController : MonoBehaviour
     }
 
     // === Static / Falling ===
-    private void SpawnRandomTrap(TrapSystem system)
+    private IEnumerator SpawnRandomTrap(TrapSystem system)
     {
         UpdateBlockedStates(system);
 
@@ -171,7 +171,7 @@ public class TrapController : MonoBehaviour
         if (totalAvailable == 0)
         {
             Debug.LogWarning($"[{system.type} System] NO AVAILABLE CELLS FOR SPAWN!");
-            return;
+            yield break;
         }
 
         var eligibleRows = system.spawnCells
@@ -184,7 +184,7 @@ public class TrapController : MonoBehaviour
         if (eligibleRows.Count == 0)
         {
             Debug.LogWarning($"[{system.type} System] NO ELIGIBLE ROWS!");
-            return;
+            yield break;
         }
 
         int randomRow = eligibleRows[Random.Range(0, eligibleRows.Count)];
@@ -192,17 +192,25 @@ public class TrapController : MonoBehaviour
             .Where(cell => cell.row == randomRow && !cell.isBlocked && !system.usedCells.Contains(cell))
             .ToList();
 
-        if (availableCells.Count == 0) return;
+        if (availableCells.Count == 0) yield break;
 
         SpawnCell selectedCell = availableCells[Random.Range(0, availableCells.Count)];
         system.usedCells.Add(selectedCell);
         selectedCell.isBlocked = true;
 
-        GameObject trapObj = Instantiate(system.trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
         if (system.type == TrapType.Static)
         {
             ActionBus.InvokeSpawnStaticTrap(selectedCell.spawnPoint.position);
         }
+        else if (system.type == TrapType.Falling)
+        {
+            ActionBus.InvokeSpawnFallingTrap();
+        }
+
+        yield return new WaitForSeconds(Consts.HalfFallingAnimation);
+
+        GameObject trapObj = Instantiate(system.trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
+
         if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
         {
             trap.Init(player.transform, null, selectedCell.spawnPoint.position, system.type);
