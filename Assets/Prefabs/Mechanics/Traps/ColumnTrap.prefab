@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7707942861073907363}
   - component: {fileID: 191364496472075835}
   m_Layer: 0
-  m_Name: StaticTrap
+  m_Name: ColumnTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.81960785, g: 0.30980393, b: 0.33333334, a: 0.9019608}
+  m_Color: {r: 0.5921569, g: 0.7411765, b: 0.3529412, a: 0.9019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49266903912a6041a3904258490e070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrapBehaviour
-  currentTrapType: 0
+  currentTrapType: 2
   destroyOffset: 5
   lifetimeFallback: 10
   fallTargetY: -3.85

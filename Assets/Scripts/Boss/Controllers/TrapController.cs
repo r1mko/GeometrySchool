@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(BossTeacherController))]
+[RequireComponent(typeof(MechanicManager))]
 public class TrapController : MonoBehaviour
 {
     [Serializable]
@@ -207,8 +207,6 @@ public class TrapController : MonoBehaviour
         {
             ActionBus.InvokeSpawnFallingTrap();
         }
-
-        yield return new WaitForSeconds(Consts.HalfFallingAnimation);
 
         GameObject trapObj = Instantiate(system.trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class TrapBehaviour : MonoBehaviour
 {
@@ -18,12 +19,21 @@ public class TrapBehaviour : MonoBehaviour
         new Keyframe(1f, 1f, 0f, 0f)
     );
 
+    [Header("Appear Animation")]
+    [SerializeField] private float appearDuration = 0.25f;
+    [SerializeField]
+    private AnimationCurve appearCurve = new AnimationCurve(
+        new Keyframe(0f, 0f),
+        new Keyframe(0.6f, 1.2f),
+        new Keyframe(1f, 1f)
+    );
+
     private Transform playerTransform;
     private bool initialized;
     private float startY;
     private float fallStartTime;
 
-    public void Init(Transform player, BossTeacherController boss, Vector3 spawnPos, TrapType type)
+    public void Init(Transform player, MechanicManager boss, Vector3 spawnPos, TrapType type)
     {
         currentTrapType = type;
         playerTransform = player;
@@ -38,6 +48,26 @@ public class TrapBehaviour : MonoBehaviour
             startY = spawnPos.y;
             fallStartTime = Time.time;
         }
+
+        StartCoroutine(AppearRoutine());
+    }
+
+    private IEnumerator AppearRoutine()
+    {
+        float elapsed = 0f;
+        Vector3 startScale = transform.localScale; // на случай если не ноль
+        while (elapsed < appearDuration)
+        {
+            float t = elapsed / appearDuration;
+            float scaleMultiplier = appearCurve.Evaluate(t);
+            transform.localScale = startScale * scaleMultiplier;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Убедимся, что финальное значение — ровно как в конце кривой
+        float finalScale = appearCurve.Evaluate(1f);
+        transform.localScale = startScale * finalScale;
     }
 
     private void Update()

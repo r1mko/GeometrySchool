@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BossTeacherController : MonoBehaviour
+public class MechanicManager : MonoBehaviour
 {
     // Movement
     public PlayerController player;
@@ -35,7 +35,8 @@ public class BossTeacherController : MonoBehaviour
             for (int i = 0; i < 1; i++)
             {
                 //rayController.ShotRay(RayType.Target);
-                trapController.TriggerTrapPlacement(TrapType.Column);
+                trapController.TriggerTrapPlacement(TrapType.Falling);
+                trapController.TriggerTrapPlacement(TrapType.Static);
 
             }
         }
