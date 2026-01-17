@@ -42,6 +42,7 @@ public class TrapController : MonoBehaviour
     [SerializeField] private TrapSystem staticTrapSystem = new() { type = TrapType.Static };
     [SerializeField] private TrapSystem fallingTrapSystem = new() { type = TrapType.Falling };
     [SerializeField] private TrapSystem columnTrapSystem = new() { type = TrapType.Column };
+    [SerializeField] private float columnSpawnDelay;
 
     private PlayerController player;
 
@@ -271,12 +272,10 @@ public class TrapController : MonoBehaviour
         system.successfulSpawnCount += spawnedCount;
 
         ActionBus.InvokeSpawnColumn();
-        yield return new WaitForSeconds(Consts.HalfColumnAnimation); //TO DO
 
         foreach (var cell in availableCellsInRow)
         {
             if (cell == skippedCell) continue;
-
 
             GameObject trapObj = Instantiate(system.trapPrefab, cell.spawnPoint.position, Quaternion.identity);
             if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
@@ -287,6 +286,7 @@ public class TrapController : MonoBehaviour
             system.usedCells.Add(cell);
             cell.isBlocked = true;
             spawnedCount++;
+            yield return new WaitForSeconds(columnSpawnDelay); //TO DO
         }
 
         Debug.Log($"[Column System] Spawned row {targetRowData.Row}: {spawnedCount} traps, skipped 1 random cell (total available: {availableCellsInRow.Count})");
