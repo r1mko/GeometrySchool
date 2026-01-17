@@ -154,6 +154,12 @@ public class TrapController : MonoBehaviour
     private void DetachSpawnContainer(TrapSystem system)
     {
         system.spawnPointsContainer.SetParent(null);
+
+        Vector3 pos = system.spawnPointsContainer.position;
+        pos.x = RoundUpToOdd(pos.x);
+        system.spawnPointsContainer.position = pos;
+
+        UpdateLastColumnWorldPosition(system);
     }
 
     private void AttachSpawnContainer(TrapSystem system)
@@ -326,5 +332,11 @@ public class TrapController : MonoBehaviour
         {
             ResetTrapSystem(system);
         }
+    }
+
+    private float RoundUpToOdd(float value)
+    {
+        int rounded = Mathf.CeilToInt(value);
+        return (rounded % 2 == 0) ? rounded + 1 : rounded;
     }
 }
