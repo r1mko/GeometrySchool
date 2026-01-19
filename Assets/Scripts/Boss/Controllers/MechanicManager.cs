@@ -34,11 +34,14 @@ public class MechanicManager : MonoBehaviour
         {
             for (int i = 0; i < 1; i++)
             {
+                //bulletController.ShotProjectile(BulletType.Straight);
+                //bulletController.ShotProjectile(BulletType.Wave);
+                //bulletController.ShotProjectile(BulletType.ZBullet);
                 //rayController.ShotRay(RayType.Target);
                 //rayController.ShotRay(RayType.Static);
                 //rayController.ShotRay(RayType.Dynamic);
-                trapController.TriggerTrapPlacement(TrapType.Falling);
-                trapController.TriggerTrapPlacement(TrapType.Static);
+                //trapController.TriggerTrapPlacement(TrapType.Falling);
+                //trapController.TriggerTrapPlacement(TrapType.Static);
                 trapController.TriggerTrapPlacement(TrapType.Column);
 
             }
