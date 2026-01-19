@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         atTopBorder = false;
         foreach (var col in topColliders)
         {
-            if (col.CompareTag("TopBorder"))
+            if (col.CompareTag("Border"))
             {
                 atTopBorder = true;
                 break;
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         atBottomBorder = false;
         foreach (var col in bottomColliders)
         {
-            if (col.CompareTag("BottomBorder"))
+            if (col.CompareTag("Border"))
             {
                 atBottomBorder = true;
                 break;
