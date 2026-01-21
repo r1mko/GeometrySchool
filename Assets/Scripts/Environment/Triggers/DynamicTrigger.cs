@@ -1,44 +1,48 @@
 ﻿using UnityEngine;
 
-public enum TriggerCategory
+public enum TriggerType
 {
-    Trap,
-    Ray,
-    Bullet
+    // Traps
+    StaticTrap,
+    FallingTrap,
+    ColumnTrap,
+
+    // Rays
+    DynamicRay,
+    StaticRay,
+    TargetRay,
+
+    // Bullets
+    StraightBullet,
+    WaveBullet,
+    ZBullet
 }
 
 public class DynamicTrigger : MonoBehaviour
 {
-    [SerializeField] private TriggerCategory category;
-
-    [SerializeField] private TrapType trapType;
-    [SerializeField] private RayType rayType;
-    [SerializeField] private BulletType bulletType;
+    [SerializeField] private TriggerType currentTriggerType;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Игрок коснулся");
-            switch (category)
+            switch (currentTriggerType)
             {
-                case TriggerCategory.Trap:
-                    switch (trapType)
-                    {
-                        case TrapType.Static: ActionBus.InvokeTriggerStaticTrap(); break;
-                        case TrapType.Falling: ActionBus.InvokeTriggerFallingTrap(); break;
-                        case TrapType.Column: ActionBus.InvokeTriggerColumnTrap(); break;
+                // Traps
+                case TriggerType.StaticTrap: ActionBus.InvokeTriggerStaticTrap(); break;
+                case TriggerType.FallingTrap: ActionBus.InvokeTriggerFallingTrap(); break;
+                case TriggerType.ColumnTrap: ActionBus.InvokeTriggerColumnTrap(); break;
 
-                    }
-                    break;
+                //// Rays
+                //case TriggerType.DynamicRay: ActionBus.InvokeTriggerDynamicRay(); break;
+                //case TriggerType.StaticRay: ActionBus.InvokeTriggerStaticRay(); break;
+                //case TriggerType.TargetRay: ActionBus.InvokeTriggerTargetRay(); break;
 
-                case TriggerCategory.Ray:
-                    switch (rayType) { }
-                    break;
-
-                case TriggerCategory.Bullet:
-                    switch (bulletType) { }
-                    break;
+                //// Bullets
+                //case TriggerType.StraightBullet: ActionBus.InvokeTriggerStraightBullet(); break;
+                //case TriggerType.WaveBullet: ActionBus.InvokeTriggerWaveBullet(); break;
+                //case TriggerType.ZBullet: ActionBus.InvokeTriggerZBullet(); break;
             }
         }
     }
