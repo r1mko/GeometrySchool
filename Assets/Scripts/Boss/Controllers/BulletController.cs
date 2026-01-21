@@ -22,7 +22,7 @@ public class BulletController : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, spawnPointPosition);
         if (projectile.TryGetComponent<BulletBehaviour>(out var bulletBehaviour))
         {
-            Transform playerTransform = GameManager.Instance.Player.transform;
+            Transform playerTransform = player.transform;
             bulletBehaviour.Init(bulletType, playerTransform, waveAmplitudeStep, zBulletAmplitudeStep);
             waveAmplitudeStep = -waveAmplitudeStep;
         }

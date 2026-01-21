@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5823667646566822766}
   m_Layer: 3
   m_Name: TopBorder
-  m_TagString: TopBorder
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +61,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 500, y: 0.1, z: 1}
+  m_LocalScale: {x: 5000, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6432176329292972005}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 6380610256407142981}
   m_Layer: 3
   m_Name: BottomBorder
-  m_TagString: BottomBorder
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,7 +199,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -5, z: 0}
-  m_LocalScale: {x: 500, y: 0.1, z: 1}
+  m_LocalScale: {x: 5000, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6432176329292972005}

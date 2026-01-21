@@ -328,7 +328,7 @@ public class TrapController : MonoBehaviour
     private void CheckResetConditions(TrapSystem system)
     {
         if (!system.isTrapSystemActive) return;
-        if (player.transform.position.x > system.lastColumnWorldX + system.resetOffset)
+        if (player != null && player.transform.position.x > system.lastColumnWorldX + system.resetOffset)
         {
             ResetTrapSystem(system);
         }

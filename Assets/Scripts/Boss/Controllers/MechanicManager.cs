@@ -19,10 +19,23 @@ public class MechanicManager : MonoBehaviour
         trapController = GetComponent<TrapController>();
         rayController = GetComponent<RayController>();
         bulletController = GetComponent<BulletController>();
+
+        //subs
+        ActionBus.TriggeredColumnTrap += SpawnColumn;
+    }
+
+    private void OnDestroy()
+    {
+        ActionBus.TriggeredColumnTrap -= SpawnColumn;
     }
 
     private void FixedUpdate()
     {
+        if (player == null)
+        {
+            return;
+        }
+
         Vector3 bossPos = transform.position;
         bossPos.x = player.transform.position.x + initialBossOffsetX;
         transform.position = bossPos;
@@ -42,9 +55,12 @@ public class MechanicManager : MonoBehaviour
                 //rayController.ShotRay(RayType.Dynamic);
                 //trapController.TriggerTrapPlacement(TrapType.Falling);
                 //trapController.TriggerTrapPlacement(TrapType.Static);
-                trapController.TriggerTrapPlacement(TrapType.Column);
-
             }
         }
+    }
+
+    private void SpawnColumn()
+    {
+        trapController.TriggerTrapPlacement(TrapType.Column);
     }
 }

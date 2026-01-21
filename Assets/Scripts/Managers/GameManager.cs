@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+
+        if (Player == null)
+        {
+            Player = FindFirstObjectByType<PlayerController>();
+        }
     }
 }
