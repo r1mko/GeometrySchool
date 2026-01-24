@@ -19,20 +19,18 @@ public class RayBehaviour : MonoBehaviour
 
     private Transform playerTransform;
     private bool isMarking;
-    private bool startedScalingDown;
     private float rayStartAngle;
     private float rayEndAngle;
     private float elapsedTime = 0f;
 
-    public void Init(RayType type, Transform player)
+    public void Init(RayType type, Transform player, bool fromTop)
     {
         currentRayType = type;
         playerTransform = player;
         if (type == RayType.Dynamic)
         {
-            bool isFromTop = Random.value > 0.5f;
-            rayStartAngle = isFromTop ? topStart : bottomStart;
-            rayEndAngle = isFromTop ? topEnd : bottomEnd;
+            rayStartAngle = fromTop ? topStart : bottomStart;
+            rayEndAngle = fromTop ? topEnd : bottomEnd;
         }
         else if (type == RayType.Target)
         {
@@ -40,6 +38,12 @@ public class RayBehaviour : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
             rayStartAngle = angle;
             rayEndAngle = angle;
+            rayDuration += markedDuration; // lifetime = markedDuration + rayDuration
+            isMarking = true;
+            spriteRenderer.color = Color.red;
+        }
+        else if (type == RayType.Static)
+        {
             rayDuration += markedDuration; // lifetime = markedDuration + rayDuration
             isMarking = true;
             spriteRenderer.color = Color.red;
@@ -77,14 +81,12 @@ public class RayBehaviour : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, currentAngle);
             }
 
-            if (!startedScalingDown)
+
+            if (elapsedTime >= rayDuration - scaleDownDuration)
             {
-                if (elapsedTime >= rayDuration - scaleDownDuration)
-                {
-                    StartCoroutine(ScaleDownRoutine());
-                    startedScalingDown = true;
-                }
+                StartCoroutine(ScaleDownRoutine());
             }
+
         }
         else
         {
@@ -135,7 +137,7 @@ public class RayBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (isMarking && startedScalingDown)
+            if (isMarking)
             {
                 Debug.Log("It's just marked or scalling. Ignoring");
                 return;
