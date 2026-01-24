@@ -12,7 +12,7 @@ public class TrapBehaviour : MonoBehaviour
 
     [Header("Falling Trap Settings")]
     [SerializeField] private float fallTargetY = -3.85f;
-    [SerializeField] private float fallDuration = 1.2f;
+    [SerializeField] private float fallDuration = 2.5f;
     [SerializeField]
     private AnimationCurve fallCurve = new AnimationCurve(
         new Keyframe(0f, 0f, 0f, 0f),
@@ -33,7 +33,7 @@ public class TrapBehaviour : MonoBehaviour
     private float startY;
     private float fallStartTime;
 
-    public void Init(Transform player, MechanicManager boss, Vector3 spawnPos, TrapType type)
+    public void Init(Transform player, MechanicManager boss, Vector3 spawnPos, TrapType type )
     {
         currentTrapType = type;
         playerTransform = player;
@@ -95,11 +95,13 @@ public class TrapBehaviour : MonoBehaviour
                 }
                 break;
         }
-
-        if (currentTrapType == TrapType.Static &&
-            transform.position.x < playerTransform.position.x - destroyOffset)
+        if (playerTransform != null)
         {
-            Destroy(gameObject);
+            if (currentTrapType == TrapType.Static &&
+    transform.position.x < playerTransform.position.x - destroyOffset)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

@@ -21,13 +21,13 @@ public class MechanicManager : MonoBehaviour
         bulletController = GetComponent<BulletController>();
 
         //subs
-        ActionBus.TriggeredColumnTrap += SpawnColumn;
+        ActionBus.TriggeredTrap += SpawnTrap;
         ActionBus.TriggerSpawnRay += SpawnRay;
     }
 
     private void OnDestroy()
     {
-        ActionBus.TriggeredColumnTrap -= SpawnColumn;
+        ActionBus.TriggeredTrap -= SpawnTrap;
         ActionBus.TriggerSpawnRay -= SpawnRay;
     }
 
@@ -52,16 +52,13 @@ public class MechanicManager : MonoBehaviour
                 //bulletController.ShotProjectile(BulletType.Straight);
                 //bulletController.ShotProjectile(BulletType.Wave);
                 //bulletController.ShotProjectile(BulletType.ZBullet);
-
-                //trapController.TriggerTrapPlacement(TrapType.Falling);
-                //trapController.TriggerTrapPlacement(TrapType.Static);
             }
         }
     }
 
-    private void SpawnColumn()
+    private void SpawnTrap(TrapType trapType)
     {
-        trapController.TriggerTrapPlacement(TrapType.Column);
+        trapController.TriggerTrapPlacement(trapType);
     }
 
     private void SpawnRay(RayType rayType, int spawnIndex, bool fromTop)

@@ -205,15 +205,6 @@ public class TrapController : MonoBehaviour
         system.usedCells.Add(selectedCell);
         selectedCell.isBlocked = true;
 
-        if (system.type == TrapType.Static)
-        {
-            ActionBus.InvokeSpawnStaticTrap(selectedCell.spawnPoint.position);
-        }
-        else if (system.type == TrapType.Falling)
-        {
-            ActionBus.InvokeSpawnFallingTrap();
-        }
-
         GameObject trapObj = Instantiate(system.trapPrefab, selectedCell.spawnPoint.position, Quaternion.identity);
 
         if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
@@ -275,7 +266,7 @@ public class TrapController : MonoBehaviour
         system.lastSpawnedRow = targetRowData.Row;
         system.successfulSpawnCount += spawnedCount;
 
-        ActionBus.InvokeSpawnColumn();
+        ActionBus.InvokeSpawnedTrap();
 
         foreach (var cell in availableCellsInRow)
         {

@@ -10,7 +10,7 @@ public class RayTrigger : MonoBehaviour
         [Header("Bounds: [0, 1, 2]")]
         public int SpawnPoint;
         [Header("Just for dynamic")]
-        public bool FromTop;
+        public bool DynamicStartRayIsFromTop;
     }
 
     [SerializeField] private RayTriggerType currentRayTrigger;
@@ -19,8 +19,7 @@ public class RayTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ActionBus.InvokeTriggerSpawnRay(currentRayTrigger.RayType, currentRayTrigger.SpawnPoint, currentRayTrigger.FromTop);
-            Debug.Log($"Спавним луч: {currentRayTrigger.RayType}; в точке {currentRayTrigger.SpawnPoint}");
+            ActionBus.InvokeTriggerSpawnRay(currentRayTrigger.RayType, currentRayTrigger.SpawnPoint, currentRayTrigger.DynamicStartRayIsFromTop);
         }
     }
 }
