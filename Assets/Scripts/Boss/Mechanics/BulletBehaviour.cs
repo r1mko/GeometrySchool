@@ -7,22 +7,22 @@ public class BulletBehaviour : MonoBehaviour
     // Wave
     [SerializeField] private float waveDuration = 2f;
     [SerializeField] private AnimationCurve waveCurve;
-    private float waveAmplitude = 4f;
+    private float waveAmplitude = 4.15f;
 
     // Z Bullet
     [SerializeField] private float zBulletDuration = 2f;
     [SerializeField] private AnimationCurve zBulletCurve;
-    private float zBulletAmplitude = 4f;
+    private float zBulletAmplitude = 4.15f;
 
     // Сommon
     private Transform playerTransform;
-    private float destroyOffset = 5f;
+    private float destroyOffset = 20f;
     private float xSpeed = 10f;
     private float bulletLifetimeFallback = 10f;
     private float elapsedTime = 0f;
     private float startY;
 
-    public void Init(BulletType type, Transform player, float forceWaveAmplitude, float forceZBulletAmplitude)
+    public void Init(BulletType type, Transform player, float forceWaveAmplitude, float forceZBulletAmplitude, float waveDuration, float zBulletDuration)
     {
         currentBulletType = type;
         playerTransform = player;
@@ -30,11 +30,13 @@ public class BulletBehaviour : MonoBehaviour
         if (type == BulletType.Wave)
         {
             waveAmplitude = forceWaveAmplitude;
+            this.waveDuration = waveDuration;
             startY = transform.position.y;
         }
         else if (type == BulletType.ZBullet)
         {
             zBulletAmplitude = forceZBulletAmplitude;
+            this.zBulletDuration = zBulletDuration;
             startY = transform.position.y;
         }
 

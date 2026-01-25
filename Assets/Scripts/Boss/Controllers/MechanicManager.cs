@@ -1,16 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class MechanicManager : MonoBehaviour
 {
-    // Movement
     public PlayerController player;
-    public float initialBossOffsetX = 17f;
+    public float initialBossOffsetX;
 
-    // Trap
     [SerializeField] private TrapController trapController;
-    // Ray
     [SerializeField] private RayController rayController;
-    // Wave
     [SerializeField] private BulletController bulletController;
 
     private void Start()
@@ -23,12 +20,14 @@ public class MechanicManager : MonoBehaviour
         //subs
         ActionBus.TriggeredTrap += SpawnTrap;
         ActionBus.TriggerSpawnRay += SpawnRay;
+        ActionBus.TriggeredSpawnBullet += SpawnBullet;
     }
 
     private void OnDestroy()
     {
         ActionBus.TriggeredTrap -= SpawnTrap;
         ActionBus.TriggerSpawnRay -= SpawnRay;
+        ActionBus.TriggeredSpawnBullet -= SpawnBullet;
     }
 
     private void FixedUpdate()
@@ -43,17 +42,10 @@ public class MechanicManager : MonoBehaviour
         transform.position = bossPos;
     }
 
-    private void Update()
+
+    private void SpawnBullet(BulletType bulletType, int spawnPoint, float waveDuration, float zBulletDuration, int shotsAmount)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            for (int i = 0; i < 1; i++)
-            {
-                //bulletController.ShotProjectile(BulletType.Straight);
-                //bulletController.ShotProjectile(BulletType.Wave);
-                //bulletController.ShotProjectile(BulletType.ZBullet);
-            }
-        }
+        bulletController.SpawnBullet(bulletType, spawnPoint, waveDuration, zBulletDuration, shotsAmount);
     }
 
     private void SpawnTrap(TrapType trapType)

@@ -11,7 +11,6 @@ public static class ActionBus
     public static void InvokeSpawnedTrap() => SpawnedTrap?.Invoke();
     public static void InvokeTriggeredTrap(TrapType trapType) => TriggeredTrap?.Invoke(trapType);
 
-
     // ========== RAYS ==========
 
     public static event Action SpawnedRay;
@@ -20,22 +19,11 @@ public static class ActionBus
     public static void InvokeSpawnRay() => SpawnedRay?.Invoke();
     public static void InvokeTriggerSpawnRay(RayType rayType, int spawnPointIndex, bool fromTop) => TriggerSpawnRay?.Invoke(rayType, spawnPointIndex, fromTop);
 
-
     // ========== BULLETS ==========
 
-    public static event Action SpawnedStraightBullet;
-    public static event Action SpawnedWaveBullet;
-    public static event Action SpawnedZBullet;
+    public static event Action SpawnedBullet;
+    public static event Action<BulletType,int, float, float, int> TriggeredSpawnBullet;
 
-    public static event Action TriggeredStraightBullet;
-    public static event Action TriggeredWaveBullet;
-    public static event Action TriggeredZBullet;
-
-    public static void InvokeSpawnStraightBullet() => SpawnedStraightBullet?.Invoke();
-    public static void InvokeSpawnWaveBullet() => SpawnedWaveBullet?.Invoke();
-    public static void InvokeSpawnZBullet() => SpawnedZBullet?.Invoke();
-
-    public static void InvokeTriggerStraightBullet() => TriggeredStraightBullet?.Invoke();
-    public static void InvokeTriggerWaveBullet() => TriggeredWaveBullet?.Invoke();
-    public static void InvokeTriggerZBullet() => TriggeredZBullet?.Invoke();
+    public static void InvokeSpawnBullet() => SpawnedBullet?.Invoke();
+    public static void InvokeTriggerBullet(BulletType bulletType, int spawnPoint, float waveDuration, float zBulletDuration, int shotsAmount) => TriggeredSpawnBullet?.Invoke(bulletType, spawnPoint, waveDuration, zBulletDuration, shotsAmount);
 }
