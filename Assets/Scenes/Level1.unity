@@ -322,7 +322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -338,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 83
+      value: 91
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -421,7 +421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 400
+      value: 408
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -483,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.ShotsAmount
@@ -491,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 686
+      value: 694
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -548,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.ShotsAmount
@@ -556,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 661
+      value: 669
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -680,7 +680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -700,7 +700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 451
+      value: 459
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -841,7 +841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -861,7 +861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 613
+      value: 621
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -918,7 +918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -934,7 +934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 53
+      value: 61
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1240,7 +1240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.ShotsAmount
@@ -1252,7 +1252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 209
+      value: 217
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1309,7 +1309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -1333,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 613
+      value: 621
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1539,7 +1539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.ShotsAmount
@@ -1551,7 +1551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 565
+      value: 573
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1679,7 +1679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -1695,7 +1695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 259
+      value: 267
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1927,7 +1927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -1943,7 +1943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 377
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2000,7 +2000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.ShotsAmount
@@ -2016,7 +2016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 589
+      value: 597
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2073,7 +2073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -2089,7 +2089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 53
+      value: 61
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2146,7 +2146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -2162,7 +2162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 423
+      value: 431
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2735,7 +2735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.ShotsAmount
@@ -2747,7 +2747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 233
+      value: 241
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2866,7 +2866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -2882,7 +2882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 95
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3035,7 +3035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -3047,7 +3047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 95
+      value: 103
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3109,7 +3109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -3129,7 +3129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 451
+      value: 459
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3186,7 +3186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -3198,7 +3198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3322,7 +3322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -3334,7 +3334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 83
+      value: 91
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3391,7 +3391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4618477522714980878, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186876674940479033, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: currentBulletTrigger.BulletType
@@ -3407,7 +3407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 377
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 6836985954683971415, guid: 7335baff7bbf6044a92904742083a3c3, type: 3}
       propertyPath: m_LocalPosition.y

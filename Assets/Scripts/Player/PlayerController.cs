@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!gameStarted)
+        {
+            return;
+        }
         target = Input.GetKey(KeyCode.Mouse0) ? 1 : 0;
         CheckBorders();
     }

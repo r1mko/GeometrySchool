@@ -74,9 +74,12 @@ public class BulletBehaviour : MonoBehaviour
                 break;
         }
 
-        if (transform.position.x < (playerTransform.position.x - destroyOffset))
+        if (playerTransform != null)
         {
-            Destroy(gameObject);
+            if (transform.position.x < (playerTransform.position.x - destroyOffset))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

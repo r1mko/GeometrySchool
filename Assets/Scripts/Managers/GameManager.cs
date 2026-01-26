@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,7 +17,6 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-
         if (Player == null)
         {
             Player = FindFirstObjectByType<PlayerController>();
@@ -29,7 +29,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        SoundManager.PlayBackgroundCurrentMusic();
+        StartCoroutine(StartGame());
+    }
+
+    private IEnumerator StartGame()
+    {
+        yield return null;
         Player.StartMove();
+        SoundManager.PlayBackgroundCurrentMusic();
     }
 }
