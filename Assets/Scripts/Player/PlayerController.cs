@@ -18,10 +18,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRb;
     private float current, target;
 
+    private bool gameStarted;
     private bool atTopBorder;
     private bool atBottomBorder;
 
-
+    public void StartMove()
+    {
+        gameStarted = true;
+    }
 
     private void Start()
     {
@@ -36,6 +40,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!gameStarted)
+        {
+            return;
+        }
+
         if (target == 1)
         {
             WaveUp();

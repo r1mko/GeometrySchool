@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public PlayerController Player;
+    public SoundManager SoundManager;
 
     private void Awake()
     {
@@ -20,5 +21,15 @@ public class GameManager : MonoBehaviour
         {
             Player = FindFirstObjectByType<PlayerController>();
         }
+        if (SoundManager == null)
+        {
+            SoundManager = FindFirstObjectByType<SoundManager>();
+        }
+    }
+
+    private void Start()
+    {
+        SoundManager.PlayBackgroundCurrentMusic();
+        Player.StartMove();
     }
 }

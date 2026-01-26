@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletBehaviour
   currentBulletType: 0
+  straightSpeedMultiplayer: 2
   waveDuration: 2
   waveCurve:
     serializedVersion: 2
@@ -187,7 +188,6 @@ MonoBehaviour:
     m_PreInfinity: 1
     m_PostInfinity: 1
     m_RotationOrder: 4
-  xSpeed: 5
 --- !u!212 &5448407545810018501
 SpriteRenderer:
   serializedVersion: 2

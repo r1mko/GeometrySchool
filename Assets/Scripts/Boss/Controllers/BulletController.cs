@@ -27,7 +27,7 @@ public class BulletController : MonoBehaviour
             ShotProjectile(bulletType, spawnPoint, waveDuration, zBulletDuration);
             if (bulletType == BulletType.Straight)
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.075f);
             }
             else
             {

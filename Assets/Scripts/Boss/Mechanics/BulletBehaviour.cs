@@ -3,6 +3,8 @@
 public class BulletBehaviour : MonoBehaviour
 {
     public BulletType currentBulletType;
+    // Straight
+    [SerializeField] private float straightSpeedMultiplayer = 2f;
 
     // Wave
     [SerializeField] private float waveDuration = 2f;
@@ -38,6 +40,10 @@ public class BulletBehaviour : MonoBehaviour
             zBulletAmplitude = forceZBulletAmplitude;
             this.zBulletDuration = zBulletDuration;
             startY = transform.position.y;
+        }
+        else if (type == BulletType.Straight)
+        {
+            xSpeed *= straightSpeedMultiplayer;
         }
 
         CancelInvoke(nameof(DestroyFallback));
