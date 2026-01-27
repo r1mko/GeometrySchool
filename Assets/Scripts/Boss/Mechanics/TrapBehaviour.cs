@@ -7,7 +7,7 @@ public class TrapBehaviour : MonoBehaviour
     public TrapType currentTrapType = TrapType.Static;
     public float SpawnX { get; private set; }
 
-    [SerializeField] private float destroyOffset = 5f;
+    [SerializeField] private float destroyOffset = 20f;
     [SerializeField] private float lifetimeFallback = 10f;
 
     [Header("Falling Trap Settings")]
@@ -108,13 +108,5 @@ public class TrapBehaviour : MonoBehaviour
     private void DestroyFallback()
     {
         Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("Player hit by trap!");
-        }
     }
 }

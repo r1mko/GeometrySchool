@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool Testing;
     // wave movement
     [SerializeField] private Vector2 waveForceDirectionUp;
     [SerializeField] private Vector2 waveForceDirectionDown;
@@ -127,6 +128,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (Testing)
+        {
+            return;
+        }
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             Destroy(gameObject);

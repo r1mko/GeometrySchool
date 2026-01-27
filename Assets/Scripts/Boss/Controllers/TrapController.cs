@@ -280,8 +280,6 @@ public class TrapController : MonoBehaviour
             spawnedCount++;
             yield return new WaitForSeconds(columnSpawnDelay);
         }
-
-        Debug.Log($"[Column System] Spawned row {targetRowData.Row}: {spawnedCount} traps, skipped 1 random cell (total available: {availableCellsInRow.Count})");
     }
 
     private void UpdateBlockedStates(TrapSystem system)
