@@ -128,15 +128,20 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            LevelRestart();
+        }
+    }
+
+    public void LevelRestart()
+    {
         if (Testing)
         {
             return;
         }
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            Destroy(gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnDrawGizmos()

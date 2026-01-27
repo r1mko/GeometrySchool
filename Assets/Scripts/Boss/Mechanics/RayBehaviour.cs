@@ -142,6 +142,7 @@ public class RayBehaviour : MonoBehaviour
                 Debug.Log("It's just marked or scalling. Ignoring");
                 return;
             }
+            collision.GetComponent<PlayerController>().LevelRestart();
             Debug.Log("Player hit by Ray!");
         }
     }

@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrapBehaviour
   currentTrapType: 0
-  destroyOffset: 5
+  destroyOffset: 20
   lifetimeFallback: 10
   fallTargetY: -3.85
   fallDuration: 1.2
