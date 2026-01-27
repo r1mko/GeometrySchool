@@ -116,7 +116,7 @@ public class TrapController : MonoBehaviour
         }
         else
         {
-            StartCoroutine(SpawnRandomTrap(targetSystem));
+            StartCoroutine(SpawnTrapSequentiallyOrRandomly(targetSystem));
         }
 
         if (targetSystem.spawnAttemptCount >= 18)
@@ -169,39 +169,36 @@ public class TrapController : MonoBehaviour
     }
 
     // === Static / Falling ===
-    private IEnumerator SpawnRandomTrap(TrapSystem system)
+    private IEnumerator SpawnTrapSequentiallyOrRandomly(TrapSystem system)
     {
         UpdateBlockedStates(system);
 
-        int totalAvailable = system.spawnCells.Count(cell => !cell.isBlocked && !system.usedCells.Contains(cell));
+        // Получаем все доступные ячейки (не заблокированные и не использованные)
+        var availableCells = system.spawnCells
+            .Where(cell => !cell.isBlocked && !system.usedCells.Contains(cell))
+            .ToList();
 
-        if (totalAvailable == 0)
+        if (availableCells.Count == 0)
         {
             Debug.LogWarning($"[{system.type} System] NO AVAILABLE CELLS FOR SPAWN!");
             yield break;
         }
 
-        var eligibleRows = system.spawnCells
-            .Where(cell => !cell.isBlocked && !system.usedCells.Contains(cell))
-            .GroupBy(cell => cell.row)
-            .Where(g => g.Any())
-            .Select(g => g.Key)
-            .ToList();
+        SpawnCell selectedCell;
 
-        if (eligibleRows.Count == 0)
+        if (system.type == TrapType.Falling)
         {
-            Debug.LogWarning($"[{system.type} System] NO ELIGIBLE ROWS!");
-            yield break;
+            selectedCell = availableCells
+                .OrderBy(cell => cell.row)
+                .ThenBy(cell => cell.column)
+                .First();
+        }
+        else
+        {
+            // Для Static — остаётся рандомный выбор
+            selectedCell = availableCells[Random.Range(0, availableCells.Count)];
         }
 
-        int randomRow = eligibleRows[Random.Range(0, eligibleRows.Count)];
-        var availableCells = system.spawnCells
-            .Where(cell => cell.row == randomRow && !cell.isBlocked && !system.usedCells.Contains(cell))
-            .ToList();
-
-        if (availableCells.Count == 0) yield break;
-
-        SpawnCell selectedCell = availableCells[Random.Range(0, availableCells.Count)];
         system.usedCells.Add(selectedCell);
         selectedCell.isBlocked = true;
 
@@ -281,7 +278,7 @@ public class TrapController : MonoBehaviour
             system.usedCells.Add(cell);
             cell.isBlocked = true;
             spawnedCount++;
-            yield return new WaitForSeconds(columnSpawnDelay); //TO DO
+            yield return new WaitForSeconds(columnSpawnDelay);
         }
 
         Debug.Log($"[Column System] Spawned row {targetRowData.Row}: {spawnedCount} traps, skipped 1 random cell (total available: {availableCellsInRow.Count})");
