@@ -33,13 +33,13 @@ public class TrapBehaviour : MonoBehaviour
     private float startY;
     private float fallStartTime;
 
-    public void Init(Transform player, MechanicManager boss, Vector3 spawnPos, TrapType type )
+    public void Init(Transform player, MechanicManager boss, Vector3 spawnPos, TrapType type, float fallingTrapDuration = 2.5f)
     {
         currentTrapType = type;
         playerTransform = player;
         SpawnX = spawnPos.x;
+        fallDuration = fallingTrapDuration;
         initialized = true;
-
         CancelInvoke(nameof(DestroyFallback));
         Invoke(nameof(DestroyFallback), lifetimeFallback);
 

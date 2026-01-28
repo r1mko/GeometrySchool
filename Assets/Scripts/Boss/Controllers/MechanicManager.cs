@@ -48,9 +48,9 @@ public class MechanicManager : MonoBehaviour
         bulletController.SpawnBullet(bulletType, spawnPoint, waveDuration, zBulletDuration, shotsAmount);
     }
 
-    private void SpawnTrap(TrapType trapType)
+    private void SpawnTrap(TrapType trapType, float fallingTrapDuration)
     {
-        trapController.TriggerTrapPlacement(trapType);
+        trapController.TriggerTrapPlacement(trapType, fallingTrapDuration);
     }
 
     private void SpawnRay(RayType rayType, int spawnIndex, bool fromTop)

@@ -6,10 +6,10 @@ public static class ActionBus
     // ========== TRAPS ==========
 
     public static event Action SpawnedTrap;
-    public static event Action<TrapType> TriggeredTrap;
+    public static event Action<TrapType, float> TriggeredTrap;
 
     public static void InvokeSpawnedTrap() => SpawnedTrap?.Invoke();
-    public static void InvokeTriggeredTrap(TrapType trapType) => TriggeredTrap?.Invoke(trapType);
+    public static void InvokeTriggeredTrap(TrapType trapType, float fallingTrapDuration) => TriggeredTrap?.Invoke(trapType, fallingTrapDuration);
 
     // ========== RAYS ==========
 

@@ -87,7 +87,7 @@ public class TrapController : MonoBehaviour
             columnTrapSystem.spawnPointsContainer.localPosition = columnTrapSystem.originalContainerLocalPosition;
     }
 
-    public void TriggerTrapPlacement(TrapType trapType)
+    public void TriggerTrapPlacement(TrapType trapType, float fallingTrapDuration)
     {
         TrapSystem targetSystem = trapType switch
         {
@@ -116,7 +116,7 @@ public class TrapController : MonoBehaviour
         }
         else
         {
-            StartCoroutine(SpawnTrapSequentiallyOrRandomly(targetSystem));
+            StartCoroutine(SpawnTrapSequentiallyOrRandomly(targetSystem, fallingTrapDuration));
         }
 
         if (targetSystem.spawnAttemptCount >= 18)
@@ -169,7 +169,7 @@ public class TrapController : MonoBehaviour
     }
 
     // === Static / Falling ===
-    private IEnumerator SpawnTrapSequentiallyOrRandomly(TrapSystem system)
+    private IEnumerator SpawnTrapSequentiallyOrRandomly(TrapSystem system, float fallingTrapDuration)
     {
         UpdateBlockedStates(system);
 
@@ -206,7 +206,7 @@ public class TrapController : MonoBehaviour
 
         if (trapObj.TryGetComponent<TrapBehaviour>(out var trap))
         {
-            trap.Init(player.transform, null, selectedCell.spawnPoint.position, system.type);
+            trap.Init(player.transform, null, selectedCell.spawnPoint.position, system.type, fallingTrapDuration);
         }
 
         system.successfulSpawnCount++;
