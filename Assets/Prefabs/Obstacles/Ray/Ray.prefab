@@ -55,7 +55,7 @@ MonoBehaviour:
   topEnd: -8
   bottomStart: -30
   bottomEnd: 8
-  rayLength: {x: 16, y: 0.1, z: 1}
+  rayLength: {x: 25, y: 0.1, z: 1}
   spriteRenderer: {fileID: 5448407545810018501}
 --- !u!212 &5448407545810018501
 SpriteRenderer:
