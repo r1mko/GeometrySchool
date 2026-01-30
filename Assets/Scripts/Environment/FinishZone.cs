@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinishZone : MonoBehaviour
 {
@@ -6,7 +7,12 @@ public class FinishZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("<color=green>You reached the finish!</color>");
+            LoadMenuScene();
         }
+    }
+
+    private void LoadMenuScene()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
