@@ -5,6 +5,8 @@ public class RayBehaviour : MonoBehaviour
 {
     public RayType currentRayType;
 
+    [SerializeField] private Color markColor;
+    [SerializeField] private Color originalColor;
     [SerializeField] private float markedDuration = 1f;
     [SerializeField] private float rayDuration = 2f;
     [SerializeField] private float scaleUpDuration = 0.25f;
@@ -13,7 +15,7 @@ public class RayBehaviour : MonoBehaviour
     [SerializeField] private float topEnd = -8f;
     [SerializeField] private float bottomStart = -30f;
     [SerializeField] private float bottomEnd = 8f;
-    [SerializeField] private Vector3 rayLength = new Vector3(16f, 0.1f, 1f);
+    [SerializeField] private Vector3 rayLength = new Vector3(25f, 0.1f, 1f);
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -40,13 +42,13 @@ public class RayBehaviour : MonoBehaviour
             rayEndAngle = angle;
             rayDuration += markedDuration; // lifetime = markedDuration + rayDuration
             isMarking = true;
-            spriteRenderer.color = Color.red;
+            spriteRenderer.color = markColor;
         }
         else if (type == RayType.Static)
         {
             rayDuration += markedDuration; // lifetime = markedDuration + rayDuration
             isMarking = true;
-            spriteRenderer.color = Color.red;
+            spriteRenderer.color = markColor;
         }
 
         transform.rotation = Quaternion.Euler(0, 0, rayStartAngle);
@@ -67,7 +69,7 @@ public class RayBehaviour : MonoBehaviour
             if (elapsedTime >= markedDuration)
             {
                 isMarking = false;
-                spriteRenderer.color = Color.white;
+                spriteRenderer.color = originalColor;
             }
         }
 

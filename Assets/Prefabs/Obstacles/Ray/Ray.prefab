@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 25, y: 1, z: 25}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RayBehaviour
   currentRayType: 0
+  markColor: {r: 0.21306515, g: 0.28761712, b: 0.6603774, a: 0.9019608}
+  originalColor: {r: 0.7176471, g: 0.2392157, b: 0.26666668, a: 0.9019608}
   markedDuration: 1
   rayDuration: 2
   scaleUpDuration: 0.25
@@ -55,7 +57,7 @@ MonoBehaviour:
   topEnd: -8
   bottomStart: -30
   bottomEnd: 8
-  rayLength: {x: 25, y: 0.1, z: 1}
+  rayLength: {x: 25, y: 1, z: 1}
   spriteRenderer: {fileID: 5448407545810018501}
 --- !u!212 &5448407545810018501
 SpriteRenderer:
@@ -106,12 +108,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 9c1785c550d23b845a76123a518a4f81, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 90daab72e4721ec4dabecbbb6fd0d92a, type: 3}
+  m_Color: {r: 0.7176471, g: 0.23921569, b: 0.26666668, a: 0.9019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.1015625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -150,15 +152,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.9, y: 0}
+  m_Offset: {x: -0.9224804, y: -0.051091306}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 1, y: 0.5}
-    oldSize: {x: 1.8870239, y: 2.8085938}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 1.8461537, y: 0.1875}
+    newSize: {x: 1, y: 0.1015625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.9, y: 2.85}
+  m_Size: {x: 1.855039, y: 0.36351538}
   m_EdgeRadius: 0
