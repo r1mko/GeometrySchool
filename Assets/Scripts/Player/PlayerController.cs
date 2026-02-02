@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        SplatManager.Instance.SpawnBloodSplat(transform);
         Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

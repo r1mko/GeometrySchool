@@ -13,6 +13,9 @@ public class FinishZone : MonoBehaviour
 
     private void LoadMenuScene()
     {
+        if (SplatManager.Instance != null)
+            SplatManager.Instance.DestroySelf();
+
         SceneManager.LoadScene("Menu");
     }
 }
