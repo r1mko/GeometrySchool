@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerController Player;
     public SoundManager SoundManager;
+    public UIManager UIManager;
 
     private void Awake()
     {
@@ -25,6 +26,10 @@ public class GameManager : MonoBehaviour
         {
             SoundManager = FindFirstObjectByType<SoundManager>();
         }
+        if (UIManager == null)
+        {
+            UIManager = FindFirstObjectByType<UIManager>();
+        }
     }
 
     private void Start()
@@ -37,5 +42,6 @@ public class GameManager : MonoBehaviour
         yield return null;
         Player.StartMove();
         SoundManager.PlayBackgroundCurrentMusic();
+        UIManager.StartTracking();
     }
 }
