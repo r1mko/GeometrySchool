@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public bool Testing;
+    public bool GameStarted;
     // wave movement
     [SerializeField] private Vector2 waveForceDirectionUp;
     [SerializeField] private Vector2 waveForceDirectionDown;
@@ -19,13 +20,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRb;
     private float current, target;
 
-    private bool gameStarted;
     private bool atTopBorder;
     private bool atBottomBorder;
 
     public void StartMove()
     {
-        gameStarted = true;
+        GameStarted = true;
     }
 
     private void Start()
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!gameStarted)
+        if (!GameStarted)
         {
             return;
         }
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!gameStarted)
+        if (!GameStarted)
         {
             return;
         }

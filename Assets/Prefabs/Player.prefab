@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Controller
   Testing: 0
+  GameStarted: 0
   waveForceDirectionUp: {x: 8.5, y: 8.5}
   waveForceDirectionDown: {x: 8.5, y: -8.5}
   waveAngleRotation: 35
