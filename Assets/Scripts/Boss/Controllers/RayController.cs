@@ -24,7 +24,6 @@ public class RayController : MonoBehaviour
         if (projectile.TryGetComponent<RayBehaviour>(out var rayBehaviour))
         {
             rayBehaviour.Init(rayType, player.transform, fromTop);
-            ActionBus.InvokeSpawnRay();
         }
     }
 }

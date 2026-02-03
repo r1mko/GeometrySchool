@@ -263,8 +263,6 @@ public class TrapController : MonoBehaviour
         system.lastSpawnedRow = targetRowData.Row;
         system.successfulSpawnCount += spawnedCount;
 
-        ActionBus.InvokeSpawnedTrap();
-
         foreach (var cell in availableCellsInRow)
         {
             if (cell == skippedCell) continue;
