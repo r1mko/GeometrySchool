@@ -4,12 +4,11 @@ using UnityEngine.UI;
 
 public class UIMenu : MonoBehaviour
 {
-    private const string SceneLevelPrefix = "Level";
     [SerializeField] private Button playButton;
 
     private void Start()
     {
-        playButton.onClick.AddListener(() => LoadScene(1)); //to do поменять на индексы
+        playButton.onClick.AddListener(() => LoadScene(1));
     }
 
     private void OnDestroy()
@@ -19,7 +18,6 @@ public class UIMenu : MonoBehaviour
 
     private void LoadScene(int levelIndex)
     {
-        var levelName = SceneLevelPrefix + levelIndex.ToString();
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(levelIndex);
     }
 }

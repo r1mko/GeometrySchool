@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     private bool isTracking = false;
     private bool isFinished = false;
     private float initialDistance;
-    private const float FinishThreshold = 10f;
+    private const float FinishThreshold = 3f;
 
     public void StartTracking()
     {

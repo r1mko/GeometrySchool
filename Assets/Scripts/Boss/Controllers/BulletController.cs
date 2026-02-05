@@ -48,10 +48,13 @@ public class BulletController : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, spawnPointPosition[spawnPoint]);
         if (projectile.TryGetComponent<BulletBehaviour>(out var bulletBehaviour))
         {
-            Transform playerTransform = player.transform;
-            bulletBehaviour.Init(bulletType, playerTransform, waveAmplitudeStep, zBulletAmplitudeStep, waveDuration, zBulletDuration);
-            waveAmplitudeStep = -waveAmplitudeStep;
-            zBulletAmplitudeStep = -zBulletAmplitudeStep;
+            if (player != null)
+            {
+                Transform playerTransform = player.transform;
+                bulletBehaviour.Init(bulletType, playerTransform, waveAmplitudeStep, zBulletAmplitudeStep, waveDuration, zBulletDuration);
+                waveAmplitudeStep = -waveAmplitudeStep;
+                zBulletAmplitudeStep = -zBulletAmplitudeStep;
+            }
         }
     }
 }
