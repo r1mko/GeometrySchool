@@ -7,13 +7,13 @@ public class BulletTrigger : MonoBehaviour
     public struct BulletTriggerType
     {
         public BulletType BulletType;
+        public int ShotsAmount;
         [Header("Bounds: [0, 1, 2]")]
         public int StraightSpawnPoint;
         [Header("Bounds: [1.75 - Middle, 2.25 - Down]")]
         public float WaveDuration;
         [Header("Bounds: [2 - Middle, 3.5 - Down]")]
         public float ZBulletDuration;
-        public int ShotsAmount;
     }
 
     [SerializeField] private BulletTriggerType currentBulletTrigger;

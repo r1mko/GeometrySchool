@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.9019608, g: 0.46666667, b: 0.05882353, a: 0.9019608}
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletTrigger
   currentBulletTrigger:
     BulletType: 1
+    ShotsAmount: 30
     StraightSpawnPoint: 1
     WaveDuration: 1.75
     ZBulletDuration: 0
-    ShotsAmount: 30
