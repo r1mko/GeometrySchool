@@ -40,12 +40,14 @@ public class RayBehaviour : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
             rayStartAngle = angle;
             rayEndAngle = angle;
+            rayDuration /= 2;
             rayDuration += markedDuration; // lifetime = markedDuration + rayDuration
             isMarking = true;
             spriteRenderer.color = markColor;
         }
         else if (type == RayType.Static)
         {
+            rayDuration /= 2;
             rayDuration += markedDuration; // lifetime = markedDuration + rayDuration
             isMarking = true;
             spriteRenderer.color = markColor;
