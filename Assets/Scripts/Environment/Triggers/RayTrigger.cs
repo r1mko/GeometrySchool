@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class RayTrigger : MonoBehaviour
 {
+    [SerializeField] private MechanicManager mechanicManager;
+
     [Serializable]
     public struct RayTriggerType
     {
@@ -15,11 +17,28 @@ public class RayTrigger : MonoBehaviour
 
     [SerializeField] private RayTriggerType currentRayTrigger;
 
+    private bool invoked;
+
+    private void OnValidate()
+    {
+        if (mechanicManager == null) mechanicManager = FindFirstObjectByType<MechanicManager>();
+    }
+
+    private void Start()
+    {
+        if (mechanicManager == null) mechanicManager = FindFirstObjectByType<MechanicManager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ActionBus.InvokeTriggerSpawnRay(currentRayTrigger.RayType, currentRayTrigger.SpawnPoint, currentRayTrigger.DynamicStartRay);
+            if (!invoked)
+            {
+                mechanicManager.SpawnRay(currentRayTrigger.RayType, currentRayTrigger.SpawnPoint, currentRayTrigger.DynamicStartRay);
+                invoked = true;
+            }
+
         }
     }
 }

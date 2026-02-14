@@ -12,22 +12,11 @@ public class MechanicManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.Instance.Player;
-        trapController = GetComponent<TrapController>();
-        rayController = GetComponent<RayController>();
-        bulletController = GetComponent<BulletController>();
+        if (trapController == null) trapController = GetComponent<TrapController>();
+        if (rayController == null) rayController = GetComponent<RayController>();
+        if (bulletController == null) bulletController = GetComponent<BulletController>();
+        if (player == null) player = GameManager.Instance.Player;
 
-        //subs
-        ActionBus.TriggeredTrap += SpawnTrap;
-        ActionBus.TriggerSpawnRay += SpawnRay;
-        ActionBus.TriggeredSpawnBullet += SpawnBullet;
-    }
-
-    private void OnDestroy()
-    {
-        ActionBus.TriggeredTrap -= SpawnTrap;
-        ActionBus.TriggerSpawnRay -= SpawnRay;
-        ActionBus.TriggeredSpawnBullet -= SpawnBullet;
     }
 
     private void FixedUpdate()
@@ -43,17 +32,17 @@ public class MechanicManager : MonoBehaviour
     }
 
 
-    private void SpawnBullet(BulletType bulletType, int spawnPoint, float waveDuration, float zBulletDuration, int shotsAmount)
+    public void SpawnBullet(BulletType bulletType, int spawnPoint, float waveDuration, float zBulletDuration, int shotsAmount)
     {
         bulletController.SpawnBullet(bulletType, spawnPoint, waveDuration, zBulletDuration, shotsAmount);
     }
 
-    private void SpawnTrap(TrapType trapType, float fallingTrapDuration)
+    public void SpawnTrap(TrapType trapType, float fallingTrapDuration)
     {
         trapController.TriggerTrapPlacement(trapType, fallingTrapDuration);
     }
 
-    private void SpawnRay(RayType rayType, int spawnIndex, bool fromTop)
+    public void SpawnRay(RayType rayType, int spawnIndex, bool fromTop)
     {
         rayController.ShotRay(rayType, spawnIndex, fromTop);
     }

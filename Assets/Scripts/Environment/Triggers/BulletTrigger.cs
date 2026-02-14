@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BulletTrigger : MonoBehaviour
 {
+    [SerializeField] private MechanicManager mechanicManager;
+
     [Serializable]
     public struct BulletTriggerType
     {
@@ -18,11 +20,28 @@ public class BulletTrigger : MonoBehaviour
 
     [SerializeField] private BulletTriggerType currentBulletTrigger;
 
+    private bool invoked;
+
+    private void OnValidate()
+    {
+        if (mechanicManager == null) mechanicManager = FindFirstObjectByType<MechanicManager>();
+    }
+
+    private void Start()
+    {
+        if (mechanicManager == null) mechanicManager = FindFirstObjectByType<MechanicManager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ActionBus.InvokeTriggerBullet(currentBulletTrigger.BulletType, currentBulletTrigger.StraightSpawnPoint,currentBulletTrigger.WaveDuration,currentBulletTrigger.ZBulletDuration, currentBulletTrigger.ShotsAmount);
+            if (!invoked)
+            {
+                mechanicManager.SpawnBullet(currentBulletTrigger.BulletType, currentBulletTrigger.StraightSpawnPoint, currentBulletTrigger.WaveDuration, currentBulletTrigger.ZBulletDuration, currentBulletTrigger.ShotsAmount);
+                invoked = true;
+            }
+
         }
     }
 }
