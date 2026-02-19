@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -24,6 +25,15 @@ public class BulletBehaviour : MonoBehaviour
     private float elapsedTime = 0f;
     private float startY;
 
+    [Header("Appear Animation")]
+    [SerializeField] private float appearDuration = 0.25f;
+    [SerializeField]
+    private AnimationCurve appearCurve = new AnimationCurve(
+        new Keyframe(0f, 0f),
+        new Keyframe(0.6f, 1.2f),
+        new Keyframe(1f, 1f)
+    );
+
     public void Init(BulletType type, Transform player, float forceWaveAmplitude, float forceZBulletAmplitude, float waveDuration, float zBulletDuration)
     {
         currentBulletType = type;
@@ -48,7 +58,28 @@ public class BulletBehaviour : MonoBehaviour
 
         CancelInvoke(nameof(DestroyFallback));
         Invoke(nameof(DestroyFallback), bulletLifetimeFallback);
+
+        StartCoroutine(AppearRoutine());
     }
+
+
+    private IEnumerator AppearRoutine()
+    {
+        float elapsed = 0f;
+        Vector3 startScale = transform.localScale;
+        while (elapsed < appearDuration)
+        {
+            float t = elapsed / appearDuration;
+            float scaleMultiplier = appearCurve.Evaluate(t);
+            transform.localScale = startScale * scaleMultiplier;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        float finalScale = appearCurve.Evaluate(1f);
+        transform.localScale = startScale * finalScale;
+    }
+
 
     private void Update()
     {

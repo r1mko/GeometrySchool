@@ -55,7 +55,7 @@ public class TrapBehaviour : MonoBehaviour
     private IEnumerator AppearRoutine()
     {
         float elapsed = 0f;
-        Vector3 startScale = transform.localScale; // на случай если не ноль
+        Vector3 startScale = transform.localScale; 
         while (elapsed < appearDuration)
         {
             float t = elapsed / appearDuration;
@@ -65,7 +65,6 @@ public class TrapBehaviour : MonoBehaviour
             yield return null;
         }
 
-        // Убедимся, что финальное значение — ровно как в конце кривой
         float finalScale = appearCurve.Evaluate(1f);
         transform.localScale = startScale * finalScale;
     }
