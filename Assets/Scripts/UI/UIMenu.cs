@@ -51,7 +51,7 @@ public class UIMenu : MonoBehaviour
 
         if (currentIndex >= levels.Length || currentIndex < 0)
             currentIndex = 0;
-
+        LoadCompletionProgress();
         SaveData.CurrentLevelIndex = currentIndex;
     }
 
@@ -62,6 +62,17 @@ public class UIMenu : MonoBehaviour
         playButton.onClick.AddListener(OnPlayClick);
 
         UpdateLevelView();
+    }
+
+    private void LoadCompletionProgress()
+    {
+        if (levels == null) return;
+
+        for (int i = 0; i < levels.Length; i++)
+        {
+            bool isCompleted = SaveData.IsLevelCompleted(i);
+            levels[i].Completed = isCompleted;
+        }
     }
 
     private void OnDestroy()

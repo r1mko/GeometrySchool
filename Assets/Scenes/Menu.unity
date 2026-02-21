@@ -602,14 +602,14 @@ MonoBehaviour:
   - SceneIndex: 10
     BackgroundColor: {r: 0.83873326, g: 0.1177857, b: 0.8792453, a: 0.9019608}
     Difficult: 0
-    Completed: 1
+    Completed: 0
   difficultyIcons:
   - Difficulty: 0
-    IconSprite: {fileID: 21300000, guid: c315aa672717f8b438c13dc452aa165d, type: 3}
+    IconSprite: {fileID: 49874143576130085, guid: cc4c252722415ef4c8085c07b36f39d7, type: 3}
   - Difficulty: 1
-    IconSprite: {fileID: 21300000, guid: 90daab72e4721ec4dabecbbb6fd0d92a, type: 3}
+    IconSprite: {fileID: -7472534828213430331, guid: ff7ff1d0c16c9344aac9d9d5c1d49363, type: 3}
   - Difficulty: 2
-    IconSprite: {fileID: 532282208441007744, guid: 24627b923c873a844aa994df60e3d34c, type: 3}
+    IconSprite: {fileID: 5675857372675088757, guid: c92bc8405e486f7488e00fd5d0212fd5, type: 3}
 --- !u!1 &1789168946
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,14 +738,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.9019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 532282208441007744, guid: 24627b923c873a844aa994df60e3d34c, type: 3}
+  m_Sprite: {fileID: 5675857372675088757, guid: c92bc8405e486f7488e00fd5d0212fd5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -780,7 +780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1875089141
 RectTransform:
   m_ObjectHideFlags: 0

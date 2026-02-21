@@ -47,6 +47,8 @@ public class FinishZone : MonoBehaviour
         if (SplatManager.Instance != null)
             SplatManager.Instance.DestroySelf();
 
+        SaveData.MarkLevelAsCompleted(SaveData.CurrentLevelIndex);
+
         SceneManager.LoadScene("Menu");
     }
 }
