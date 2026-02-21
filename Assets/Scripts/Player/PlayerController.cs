@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool Testing;
     public bool GameStarted;
     // wave movement
     [SerializeField] private Vector2 waveForceDirectionUp;
@@ -136,10 +135,6 @@ public class PlayerController : MonoBehaviour
 
     public void LevelRestart()
     {
-        if (Testing)
-        {
-            return;
-        }
         SplatManager.Instance.SpawnBloodSplat(transform);
         Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
