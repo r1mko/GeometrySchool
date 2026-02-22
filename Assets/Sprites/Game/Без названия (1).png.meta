@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 6b8e5184d82685b4589046f0d2890fe1
+guid: 1793c06b45a48284489bccd47a89ae5f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4632062027068472575
-    second: vanichkin_0
+      213: -6036222816874579000
+    second: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+      (1)_0"
+  - first:
+      213: 8208528434839704841
+    second: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+      (1)_1"
+  - first:
+      213: -1553082685529260026
+    second: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+      (1)_2"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,10 +81,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 64
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 3
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,13 +135,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: vanichkin_0
+      name: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+        (1)_0"
       rect:
         serializedVersion: 2
-        x: 4
-        y: 0
-        width: 513
-        height: 389
+        x: 5
+        y: 27
+        width: 216
+        height: 176
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +151,54 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 103020bc02c97bfb0800000000000000
-      internalID: -4632062027068472575
+      spriteID: 8cb351f44570b3ca0800000000000000
+      internalID: -6036222816874579000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+        (1)_1"
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 27
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 905505fee1d8ae170800000000000000
+      internalID: 8208528434839704841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+        (1)_2"
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 27
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600083ea687527ae0800000000000000
+      internalID: -1553082685529260026
       vertices: []
       indices: 
       edges: []
@@ -161,7 +217,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      vanichkin_0: -4632062027068472575
+      "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F (1)_0": -6036222816874579000
+      "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F (1)_1": 8208528434839704841
+      "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F (1)_2": -1553082685529260026
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

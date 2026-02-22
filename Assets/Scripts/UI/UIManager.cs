@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -8,11 +9,30 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform finish;
     [SerializeField] private TextMeshProUGUI distanceText;
     [SerializeField] private Slider distanceSlider;
+    [SerializeField] private Button exitButton;
 
     private bool isTracking = false;
     private bool isFinished = false;
     private float initialDistance;
     private const float FinishThreshold = 3f;
+
+    private void Start()
+    {
+        exitButton.onClick.AddListener(LoadMenuScene);
+    }
+
+    private void OnDestroy()
+    {
+        exitButton.onClick.RemoveAllListeners();
+    }
+
+    private void LoadMenuScene()
+    {
+        if (SplatManager.Instance != null)
+            SplatManager.Instance.DestroySelf();
+
+        SceneManager.LoadScene("Menu");
+    }
 
     public void StartTracking()
     {
