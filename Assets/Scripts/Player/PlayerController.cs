@@ -32,31 +32,27 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        if (!GameStarted)
-        {
-            return;
-        }
-        target = Input.GetKey(KeyCode.Mouse0) ? 1 : 0;
-        CheckBorders();
-    }
-
     private void FixedUpdate()
     {
-        if (!GameStarted)
-        {
-            return;
-        }
+        if (!GameStarted) return;
+
+        target = Input.GetKey(KeyCode.Mouse0) ? 1 : 0;
+
+        CheckBorders();
+
+        Vector2 targetVelocity;
 
         if (target == 1)
         {
-            WaveUp();
+            targetVelocity = atTopBorder ? new Vector2(waveForceDirectionUp.x, 0f) : waveForceDirectionUp;
         }
         else
         {
-            WaveDown();
+            targetVelocity = atBottomBorder ? new Vector2(waveForceDirectionDown.x, 0f) : waveForceDirectionDown;
         }
+
+        Vector2 velocityChange = (targetVelocity - playerRb.linearVelocity) * playerRb.mass * 50f;
+        playerRb.AddForce(velocityChange);
 
         current = Mathf.MoveTowards(current, target, waveLerpBackSpeed * Time.fixedDeltaTime);
 
@@ -74,29 +70,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void WaveUp()
-    {
-        if (atTopBorder)
-        {
-            playerRb.linearVelocity = new Vector2(waveForceDirectionUp.x, 0f);
-        }
-        else
-        {
-            playerRb.linearVelocity = waveForceDirectionUp;
-        }
-    }
-
-    private void WaveDown()
-    {
-        if (atBottomBorder)
-        {
-            playerRb.linearVelocity = new Vector2(waveForceDirectionDown.x, 0f);
-        }
-        else
-        {
-            playerRb.linearVelocity = waveForceDirectionDown;
-        }
-    }
 
     private void CheckBorders()
     {
