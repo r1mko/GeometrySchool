@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using YG;
 
 public class UIMenu : MonoBehaviour
 {
@@ -62,6 +63,8 @@ public class UIMenu : MonoBehaviour
         playButton.onClick.AddListener(OnPlayClick);
 
         UpdateLevelView();
+
+        YG2.InterstitialAdvShow();
     }
 
     private void LoadCompletionProgress()
